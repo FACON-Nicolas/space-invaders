@@ -2,7 +2,7 @@
  * Ce fichier fait partie du projet Space Invaders.
  *
  * (c) 2022 gasto
- * Tous droits réservés.
+ * Tous droits rï¿½servï¿½s.
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
@@ -22,13 +22,13 @@ public class Shoot extends AbstractMovable {
     
     
     /**
-     * Crée une nouvelle instance de shoot.
+     * Crï¿½e une nouvelle instance de shoot.
      * @param game
      * @param xPosition
      * @param yPosition
      * @param sprite
      */
-    protected Shoot(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
+    public Shoot(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
         // TODO Auto-generated constructor stub.
         super(game, xPosition, yPosition, sprite);
         this.verticalSpeed=-300;
