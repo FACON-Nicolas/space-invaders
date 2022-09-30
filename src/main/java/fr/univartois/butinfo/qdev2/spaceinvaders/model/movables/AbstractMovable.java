@@ -283,7 +283,7 @@ public abstract class AbstractMovable implements IMovable {
      *
      * @return La nouvelle position de l'objet après la mise à jour.
      */
-    private static double updatePosition(double current, double speed, long delta,
+    protected static double updatePosition(double current, double speed, long delta,
             int limitMin, int limitMax) {
         double newPosition = current + (delta * speed) / 1000;
 
