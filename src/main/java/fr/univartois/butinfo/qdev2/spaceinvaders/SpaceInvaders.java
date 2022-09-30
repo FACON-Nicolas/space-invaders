@@ -19,6 +19,7 @@ package fr.univartois.butinfo.qdev2.spaceinvaders;
 import java.io.IOException;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.controller.SpaceInvadersController;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.MovableFactory;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 import javafx.application.Application;
@@ -63,14 +64,13 @@ public final class SpaceInvaders extends Application {
         // On crée ensuite le jeu, que l'on lie au contrôleur.
         // TODO Utiliser ici la bonne factory pour créer les objets du jeu.
         SpaceInvadersGame game = new SpaceInvadersGame(
-                GAME_WIDTH, GAME_HEIGHT, new SpriteStore(), null);
+                GAME_WIDTH, GAME_HEIGHT, new SpriteStore(), new MovableFactory());
         controller.setGame(game);
         game.setController(controller);
         game.prepare();
 
         // On peut maintenant afficher la scène et la fenêtre.
         Scene scene = new Scene(viewContent, GAME_WIDTH, GAME_HEIGHT);
-        stage.setScene(scene);
         stage.setTitle("Space Invaders");
         stage.setResizable(false);
         stage.show();
