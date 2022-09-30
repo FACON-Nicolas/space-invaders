@@ -289,6 +289,7 @@ public final class SpaceInvadersGame {
         life.set(life.get()-1);
         if (life.get() == 0) {
             playerIsDead();
+            animation.stop();
         }
     }
 
