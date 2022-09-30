@@ -274,14 +274,22 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IMovable alien) {
-        // TODO Mettre à jour l'état du jeu.
+        if (!alien.isConsumed()) {
+            nbRemainingAliens--;
+            alien.consume();
+            if (nbRemainingAliens == 0) 
+                alienReachedPlanet();
+        }
     }
 
     /**
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        // TODO Réduire la vie du joueur.
+        life.set(life.get()-1);
+        if (life.get() == 0) {
+            playerIsDead();
+        }
     }
 
     /**
