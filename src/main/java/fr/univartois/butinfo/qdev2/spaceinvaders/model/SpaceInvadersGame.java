@@ -233,6 +233,12 @@ public final class SpaceInvadersGame {
         clearAllMovables();
 
         // TODO Créer le vaisseau du joueur et les aliens.
+        factory.createShip(getBottomLimit(), getWidth()/2);
+        for (int i=0 ; i<5;i++) {
+            factory.createAlien(getTopLimit(), getLeftLimit());
+            nbRemainingAliens ++;
+        }
+        
     }
 
     /**
@@ -261,10 +267,7 @@ public final class SpaceInvadersGame {
      * Cette méthode est sans effet si le délai entre deux tirs n'est pas atteint.
      */
     public void fireShot() {
-        if (lastShot == 0 || System.currentTimeMillis() - lastShot >= SHOT_TEMPORIZATION) {
-            lastShot = System.currentTimeMillis();
-            addMovable(factory.createShot(ship.getX(), ship.getY()));
-        }
+        // TODO Déclencher un tir, à condition que le délai ait été respecté.
     }
 
     /**
@@ -274,42 +277,28 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IMovable alien) {
-        if (!alien.isConsumed()) {
-            nbRemainingAliens--;
-            alien.consume();
-            if (nbRemainingAliens == 0) 
-                alienReachedPlanet();
-        }
+        // TODO Mettre à jour l'état du jeu.
     }
 
     /**
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        life.set(life.get()-1);
-        if (life.get() == 0) {
-            playerIsDead();
-            animation.stop();
-        }
+        // TODO Réduire la vie du joueur.
     }
 
     /**
      * Termine la partie lorsque le joueur est tué.
      */
     public void playerIsDead() {
-        // Interrompre la partie.
-        ship.consume();
-        animation.stop();
-        controller.gameOver("Le joueur est mort ! Fin de la partie");
+        // TODO Interrompre la partie.
     }
 
     /**
      * Termine la partie lorsque les aliens atteignent la planète.
      */
     public void alienReachedPlanet() {
-        // Interrompre la partie.
-        animation.stop();
-        controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");
+        // TODO Interrompre la partie.
     }
 
     /**
