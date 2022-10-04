@@ -46,7 +46,29 @@ public class PlayerShip extends AbstractMovable {
      */
     @Override
     public void collidedWith(IMovable other) {
-        // TODO Auto-generated method stub.
+        other.hitAlien();
+        
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#hitAlien()
+     */
+    @Override
+    public void hitAlien() {
+        game.playerIsDead();
+        
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#receiveShot()
+     */
+    @Override
+    public void receiveShot() {
+        game.reducePlayerLife();
         
     }
 
