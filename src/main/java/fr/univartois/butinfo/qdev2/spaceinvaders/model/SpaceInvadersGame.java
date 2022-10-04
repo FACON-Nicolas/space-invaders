@@ -314,8 +314,8 @@ public final class SpaceInvadersGame {
     public void alienReachedPlanet() {
         // Interrompre la partie.
         animation.stop();
-        controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");    
-        }
+        controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");
+    }
 
     /**
      * Ajoute un objet pouvant se déplacer dans le jeu.
