@@ -43,8 +43,8 @@ public class Shoot extends AbstractMovable {
      */
     @Override
     public void collidedWith(IMovable other) {
+        game.removeMovable(this);
         other.receiveShot();
-        
         
     }
     
@@ -83,7 +83,7 @@ public class Shoot extends AbstractMovable {
      */
     @Override
     public void hitAlien() {
-        
+       
     }
 
 
@@ -94,7 +94,8 @@ public class Shoot extends AbstractMovable {
      */
     @Override
     public void receiveShot() {
-        // TODO Auto-generated method stub.
+        game.removeMovable(this);
+        this.consume();
         
     }
 }

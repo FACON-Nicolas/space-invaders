@@ -46,7 +46,30 @@ public class AlienShip extends AbstractMovable{
 
     @Override
     public void collidedWith(IMovable other) {
-        // TODO Membre n°1
+        other.hitAlien();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#hitAlien()
+     */
+    @Override
+    public void hitAlien() {
+        // TODO Auto-generated method stub.
+        
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#receiveShot()
+     */
+    @Override
+    public void receiveShot() {
+        game.alienIsDead(this);
+        this.consume();
+        
     }
 
 }
