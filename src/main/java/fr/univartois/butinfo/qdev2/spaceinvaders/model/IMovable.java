@@ -177,4 +177,7 @@ public interface IMovable {
      */
     void collidedWith(IMovable other);
 
+    void hitAlien();
+    
+    void receiveShot();
 }

@@ -44,6 +44,7 @@ public class Shoot extends AbstractMovable {
     @Override
     public void collidedWith(IMovable other) {
         game.removeMovable(this);
+        other.receiveShot();
         
     }
     
@@ -72,6 +73,30 @@ public class Shoot extends AbstractMovable {
 
         // L'objet n'a atteint aucune limite
         return true;
+    }
+
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#hitAlien()
+     */
+    @Override
+    public void hitAlien() {
+       
+    }
+
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#receiveShot()
+     */
+    @Override
+    public void receiveShot() {
+        game.removeMovable(this);
+        this.consume();
+        
     }
 }
 
