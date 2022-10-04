@@ -62,15 +62,11 @@ public final class SpaceInvaders extends Application {
         Parent viewContent = fxmlLoader.load();
         SpaceInvadersController controller = fxmlLoader.getController();
         controller.setStage(stage);
-        ISpriteStore spriteStore = new SpriteStore();
-        IMovableFactory factory = new MovableFactory();
-        factory.setSpriteStore(spriteStore);
 
         // On crée ensuite le jeu, que l'on lie au contrôleur.
         // TODO Utiliser ici la bonne factory pour créer les objets du jeu.
         SpaceInvadersGame game = new SpaceInvadersGame(
-                GAME_WIDTH, GAME_HEIGHT, spriteStore, factory);
-        factory.setGame(game);
+                GAME_WIDTH, GAME_HEIGHT, new SpriteStore(), new MovableFactory());
         controller.setGame(game);
         game.setController(controller);
         game.prepare();

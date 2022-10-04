@@ -204,6 +204,7 @@ public final class SpaceInvadersGame {
         controller.prepare();
         controller.bindScore(score);
         controller.bindLife(life);
+        System.out.println("test");
     }
 
     /**
