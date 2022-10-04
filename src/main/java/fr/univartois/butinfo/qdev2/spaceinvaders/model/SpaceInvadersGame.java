@@ -267,7 +267,7 @@ public final class SpaceInvadersGame {
      * Cette méthode est sans effet si le délai entre deux tirs n'est pas atteint.
      */
     public void fireShot() {
-                if (lastShot == 0 || System.currentTimeMillis() - lastShot >= SHOT_TEMPORIZATION) {
+        if (lastShot == 0 || System.currentTimeMillis() - lastShot >= SHOT_TEMPORIZATION) {
             lastShot = System.currentTimeMillis();
             addMovable(factory.createShot(ship.getX(), ship.getY()));
         }
@@ -314,7 +314,8 @@ public final class SpaceInvadersGame {
     public void alienReachedPlanet() {
         // Interrompre la partie.
         animation.stop();
-        controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");    }
+        controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");    
+        }
 
     /**
      * Ajoute un objet pouvant se déplacer dans le jeu.
