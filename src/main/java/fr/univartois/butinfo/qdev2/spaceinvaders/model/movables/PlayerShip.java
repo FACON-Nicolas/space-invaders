@@ -32,7 +32,7 @@ public class PlayerShip extends AbstractMovable {
      * @param yPosition
      * @param sprite
      */
-    protected PlayerShip(SpaceInvadersGame game, double xPosition, double yPosition,
+    public PlayerShip(SpaceInvadersGame game, double xPosition, double yPosition,
             Sprite sprite) {
         // TODO Auto-generated constructor stub.
         super(game, xPosition, yPosition, sprite);

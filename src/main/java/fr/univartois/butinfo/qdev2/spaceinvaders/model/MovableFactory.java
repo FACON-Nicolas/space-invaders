@@ -8,6 +8,7 @@
 package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AlienShip;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 
@@ -31,6 +32,7 @@ public class MovableFactory implements IMovableFactory {
     @Override
     public void setSpriteStore(ISpriteStore spriteStore) {
         this.spriteStore = spriteStore;
+       
     }
 
     /*
@@ -62,8 +64,7 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createShip(int x, int y) {
-        IMovable ship = null;
-        return ship;
+        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"));
     }
 
     /*
