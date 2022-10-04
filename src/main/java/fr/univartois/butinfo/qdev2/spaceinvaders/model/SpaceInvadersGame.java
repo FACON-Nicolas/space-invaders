@@ -233,6 +233,12 @@ public final class SpaceInvadersGame {
         clearAllMovables();
 
         // TODO Créer le vaisseau du joueur et les aliens.
+        factory.createShip(getBottomLimit(), getWidth()/2);
+        for (int i=0 ; i<5;i++) {
+            factory.createAlien(getTopLimit(), getLeftLimit());
+            nbRemainingAliens ++;
+        }
+        
     }
 
     /**
@@ -289,7 +295,6 @@ public final class SpaceInvadersGame {
         life.set(life.get()-1);
         if (life.get() == 0) {
             playerIsDead();
-            animation.stop();
         }
     }
 
