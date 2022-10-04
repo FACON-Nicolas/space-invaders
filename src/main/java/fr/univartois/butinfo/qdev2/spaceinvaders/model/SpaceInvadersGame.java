@@ -261,7 +261,10 @@ public final class SpaceInvadersGame {
      * Cette méthode est sans effet si le délai entre deux tirs n'est pas atteint.
      */
     public void fireShot() {
-        // TODO Déclencher un tir, à condition que le délai ait été respecté.
+        if (lastShot == 0 || System.currentTimeMillis() - lastShot >= SHOT_TEMPORIZATION) {
+            lastShot = System.currentTimeMillis();
+            addMovable(factory.createShot(ship.getX(), ship.getY()));
+        }
     }
 
     /**
@@ -271,28 +274,42 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IMovable alien) {
-        // TODO Mettre à jour l'état du jeu.
+        if (!alien.isConsumed()) {
+            nbRemainingAliens--;
+            alien.consume();
+            if (nbRemainingAliens == 0) 
+                alienReachedPlanet();
+        }
     }
 
     /**
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        // TODO Réduire la vie du joueur.
+        life.set(life.get()-1);
+        if (life.get() == 0) {
+            playerIsDead();
+            animation.stop();
+        }
     }
 
     /**
      * Termine la partie lorsque le joueur est tué.
      */
     public void playerIsDead() {
-        // TODO Interrompre la partie.
+        // Interrompre la partie.
+        ship.consume();
+        animation.stop();
+        controller.gameOver("Le joueur est mort ! Fin de la partie");
     }
 
     /**
      * Termine la partie lorsque les aliens atteignent la planète.
      */
     public void alienReachedPlanet() {
-        // TODO Interrompre la partie.
+        // Interrompre la partie.
+        animation.stop();
+        controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");
     }
 
     /**
