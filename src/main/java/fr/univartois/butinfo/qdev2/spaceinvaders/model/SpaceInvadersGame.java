@@ -204,7 +204,6 @@ public final class SpaceInvadersGame {
         controller.prepare();
         controller.bindScore(score);
         controller.bindLife(life);
-        System.out.println("test");
     }
 
     /**
@@ -235,11 +234,11 @@ public final class SpaceInvadersGame {
 
         // TODO Créer le vaisseau du joueur et les aliens.
         factory.createShip(getBottomLimit(), getWidth()/2);
+        
         for (int i=0 ; i<5;i++) {
             factory.createAlien(getTopLimit(), getLeftLimit());
             nbRemainingAliens ++;
         }
-        
     }
 
     /**

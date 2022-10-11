@@ -73,6 +73,7 @@ public final class SpaceInvaders extends Application {
 
         // On peut maintenant afficher la scène et la fenêtre.
         Scene scene = new Scene(viewContent, GAME_WIDTH, GAME_HEIGHT);
+        stage.setScene(scene);
         stage.setTitle("Space Invaders");
         stage.setResizable(false);
         stage.show();
