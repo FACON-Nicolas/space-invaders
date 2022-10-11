@@ -38,6 +38,23 @@ public final class SpriteStore implements ISpriteStore {
      * {@link Sprite} déjà chargées.
      */
     private final Map<String, Sprite> spriteCache = new HashMap<>();
+    
+    private final static SpriteStore INSTANCE = new SpriteStore();
+    
+    private SpriteStore() {
+        
+    }
+    
+    
+    /**
+     * Donne l'attribut iNSTANCE de cette instance de SpriteStore.
+     *
+     * @return L'attribut iNSTANCE de cette instance de SpriteStore.
+     */
+    public static SpriteStore getInstance() {
+        return INSTANCE;
+    }
+    
 
     /*
      * (non-Javadoc)
