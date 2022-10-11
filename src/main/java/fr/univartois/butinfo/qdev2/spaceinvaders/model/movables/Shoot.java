@@ -55,20 +55,15 @@ public class Shoot extends AbstractMovable {
      */
     @Override
     public boolean move(long delta) {
-        // On met à jour la position de l'objet sur l'axe x.
-        int limitMaxX = game.getRightLimit() - getWidth();
-        double newX = xPosition.get();
-        xPosition.set(newX);
-
-        // On met à jour la position de l'objet sur l'axe y.
+        super.move(delta);
+        
         int limitMaxY = game.getBottomLimit() - getHeight();
-        double newY = yPosition.get()+verticalSpeed;
-        yPosition.set(newY);
 
-        if ((newY == game.getTopLimit()) || (newY == limitMaxY)) {
+        if ((yPosition.get() <= game.getTopLimit()) || (yPosition.get() >= limitMaxY)) {
             // L'objet a atteint la limite sur l'axe y.
            game.removeMovable(this);
-            return false;
+           this.consume();
+           return false;
         }
 
         // L'objet n'a atteint aucune limite
@@ -96,7 +91,6 @@ public class Shoot extends AbstractMovable {
     public void receiveShot() {
         game.removeMovable(this);
         this.consume();
-        
     }
 }
 
