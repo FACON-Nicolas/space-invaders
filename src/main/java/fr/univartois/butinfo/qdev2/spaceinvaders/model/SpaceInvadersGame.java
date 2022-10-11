@@ -284,8 +284,10 @@ public final class SpaceInvadersGame {
         if (!alien.isConsumed()) {
             nbRemainingAliens--;
             alien.consume();
-            if (nbRemainingAliens == 0) 
-                alienReachedPlanet();
+            if (nbRemainingAliens == 0) {
+                animation.stop();
+                controller.gameOver("Les aliens sont morts, vous avez gagné...Fin de la partie");
+            }
         }
     }
 
