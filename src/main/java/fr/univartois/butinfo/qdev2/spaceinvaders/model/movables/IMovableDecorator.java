@@ -23,7 +23,6 @@ public abstract class IMovableDecorator implements IMovable{
     
     private IMovable decore;
     
-    protected AlienShip alien;
     
     public IMovableDecorator(IMovable decore) {
         this.decore=decore;
@@ -259,6 +258,16 @@ public abstract class IMovableDecorator implements IMovable{
     public void receiveShot() {
         // TODO Auto-generated method stub.
         decore.receiveShot();
+    }
+    
+    
+    /**
+     * Donne l'attribut decore de cette instance de IMovableDecorator.
+     *
+     * @return L'attribut decore de cette instance de IMovableDecorator.
+     */
+    protected IMovable getDecore() {
+        return decore;
     }
 
 }
