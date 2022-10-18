@@ -18,39 +18,41 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
  */
 public class VieIMovableDecorator extends IMovableDecorator{
     
-    private int vieAlien;
+    private int vie;
+    
+    /**
+     * Donne l'attribut vie de cette instance de VieIMovableDecorator.
+     *
+     * @return L'attribut vie de cette instance de VieIMovableDecorator.
+     */
+    public int getVie() {
+        return vie;
+    }
+
+
+    
+    /**
+     * Modifie l'attribut vie de cette instance de VieIMovableDecorator.
+     *
+     * @param vie La nouvelle valeur de l'attribut vie pour cette instance de VieIMovableDecorator.
+     */
+    public void setVie(int vie) {
+        this.vie = vie;
+    }
+
+
     /**
      * Crée une nouvelle instance de VieIMovableDecorator.
      * @param decore
      */
-    public VieIMovableDecorator(IMovable decore,int vieAlien) {
+    public VieIMovableDecorator(IMovable decore,int vie) {
         // TODO Auto-generated constructor stub.
         super(decore);
-        this.vieAlien=vieAlien;
+        this.vie=vie;
     }
     
     
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#collidedWith(fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable)
-     */
-    @Override
-    public void collidedWith(IMovable other) {
-        other.hitAlien();
-        
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#hitAlien()
-     */
-    @Override
-    public void hitAlien() {
-        game.playerIsDead();
-        
-    }
+    
 
     /*
      * (non-Javadoc)
@@ -59,7 +61,9 @@ public class VieIMovableDecorator extends IMovableDecorator{
      */
     @Override
     public void receiveShot() {
-        vieAlien=vieAlien-20;
+        vie--;
+        if (vie <= 0)
+            getDecore().receiveShot();
         
     }
 
