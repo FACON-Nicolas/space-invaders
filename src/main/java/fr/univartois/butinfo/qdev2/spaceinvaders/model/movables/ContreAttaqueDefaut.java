@@ -6,7 +6,10 @@
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
-
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.MovableFactory;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 
 /**
  * Le type ContreAttaqueDefaut
@@ -15,7 +18,16 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
  *
  * @version 0.1.0
  */
-public class ContreAttaqueDefaut implements IContreAttaque {
+public class ContreAttaqueDefaut extends ContreAttaqueStrategie {
+    
+    private static final int SHOT_TEMP = 500;
+    
+    private double lastShot = 0;
+    
+    
+    public ContreAttaqueDefaut(IMovable movable, SpaceInvadersGame game) {
+        super(movable, game);
+    }
 
     /*
      * (non-Javadoc)
@@ -23,8 +35,10 @@ public class ContreAttaqueDefaut implements IContreAttaque {
      * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque#fireShot()
      */
     public void fireShot() {
-        // TODO Auto-generated method stub.
+        if (lastShot == 0 || System.currentTimeMillis() - lastShot >= SHOT_TEMP) {
+            lastShot = System.currentTimeMillis();
+            game.addMovable(new Shoot(game, movable.getX(), movable.getY() + movable.getSprite().getHeight()+10, SpriteStore.getInstance().getSprite("shot")));
+       }
     }
-
 }
 
