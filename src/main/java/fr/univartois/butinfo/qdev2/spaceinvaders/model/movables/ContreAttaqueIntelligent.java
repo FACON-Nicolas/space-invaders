@@ -7,6 +7,9 @@
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 
 /**
  * Le type ContreAttaqueIntelligent
@@ -15,7 +18,15 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
  *
  * @version 0.1.0
  */
-public class ContreAttaqueIntelligent implements IContreAttaque {
+public class ContreAttaqueIntelligent extends ContreAttaqueStrategie {
+    
+    private boolean isNear = false;
+    private IMovable target;
+    
+    public ContreAttaqueIntelligent(IMovable movable, SpaceInvadersGame game, IMovable target) {
+        super(movable, game);
+        this.target = target;
+    }
 
     /*
      * (non-Javadoc)
@@ -23,7 +34,12 @@ public class ContreAttaqueIntelligent implements IContreAttaque {
      * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque#fireShot()
      */
     public void fireShot() {
-        // TODO Auto-generated method stub.
+        if (Math.abs(movable.getX() - target.getX()) < 100) {
+            if (!isNear) {
+                game.addMovable(new Shoot(game, movable.getX(), movable.getY() + movable.getSprite().getHeight()+10, SpriteStore.getInstance().getSprite("shot")));
+                isNear = true;
+            }
+        } else isNear = false;
     }
 
 }
