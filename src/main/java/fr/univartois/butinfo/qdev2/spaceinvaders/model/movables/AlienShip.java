@@ -3,16 +3,29 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
-public class AlienShip extends AbstractMovable{
+public class AlienShip extends AbstractMovable {
 
     public static final int H_SPEED = 75;
     public static final int V_SPEED = 1;
+    private ContreAttaqueStrategie contreAttaque;
+    private final Timeline timeline;
 
-    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
+    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, ContreAttaqueStrategie contreAttaque) {
         super(game, xPosition, yPosition, sprite);
         super.setHorizontalSpeed(H_SPEED);
         super.setVerticalSpeed(V_SPEED);
+        this.contreAttaque = contreAttaque;
+        if (contreAttaque != null) {
+            timeline = new Timeline(
+                    new KeyFrame(Duration.millis(16), e -> contreAttaque.fireShot()));
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.play();
+        } else timeline = null;
     }
 
     @Override
