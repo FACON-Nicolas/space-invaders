@@ -332,7 +332,7 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-    private void addMovable(IMovable object) {
+    public void addMovable(IMovable object) {
         movableObjects.add(object);
         controller.addMovable(object);
     }
