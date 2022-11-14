@@ -7,9 +7,13 @@
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AlienShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 
 /**
@@ -56,7 +60,16 @@ public class MovableFactory implements IMovableFactory {
         IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"));
         return alien;
     }
-
+    
+    public VieIMovableDecorator createAlienVie(int x, int y) {      
+        IContreAttaque defaut=new ContreAttaqueDefaut();
+        IContreAttaque intelligent=new ContreAttaqueIntelligent();
+        IContreAttaque random=new ContreAttaqueRandom();
+        List<IContreAttaque> liste =Arrays.asList(defaut,intelligent,random);
+        VieIMovableDecorator alien = new VieIMovableDecorator(createAlien(x, y), 2);
+        return alien;
+    }
+    
     /*
      * (non-Javadoc)
      *
@@ -66,7 +79,7 @@ public class MovableFactory implements IMovableFactory {
     public IMovable createShip(int x, int y) {
         return new PlayerShip(game, x, y, spriteStore.getSprite("ship"));
     }
-
+    
     /*
      * (non-Javadoc)
      *
