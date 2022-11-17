@@ -12,17 +12,17 @@ public class AlienShip extends AbstractMovable {
 
     public static final int H_SPEED = 75;
     public static final int V_SPEED = 1;
-    private ContreAttaqueStrategie contreAttaque;
+    private IContreAttaque contreAttaque;
     private final Timeline timeline;
 
-    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, ContreAttaqueStrategie contreAttaque) {
+    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, IContreAttaque element) {
         super(game, xPosition, yPosition, sprite);
         super.setHorizontalSpeed(H_SPEED);
         super.setVerticalSpeed(V_SPEED);
-        this.contreAttaque = contreAttaque;
-        if (contreAttaque != null) {
+        this.contreAttaque = element;
+        if (element != null) {
             timeline = new Timeline(
-                    new KeyFrame(Duration.millis(16), e -> contreAttaque.fireShot()));
+                    new KeyFrame(Duration.millis(16), e -> element.fireShot()));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
         } else timeline = null;

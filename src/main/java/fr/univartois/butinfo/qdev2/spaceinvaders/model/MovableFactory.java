@@ -9,8 +9,14 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AlienShip;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueDefaut;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueIntelligent;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueRandom;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueStrategie;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
@@ -57,16 +63,33 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createAlien(int x, int y) {
-        IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"));
+        IContreAttaque defaut=new ContreAttaqueDefaut();
+        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
+        //IContreAttaque random=new ContreAttaqueRandom(game, 5);
+        
+        List<IContreAttaque> liste =Arrays.asList(defaut);
+        Random rand = new Random();
+        IContreAttaque element= liste.get(rand.nextInt(liste.size()));
+        
+        IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element);
         return alien;
     }
     
-    public VieIMovableDecorator createAlienVie(int x, int y) {      
+    public VieIMovableDecorator createAlienVie(int x, int y) {  
         IContreAttaque defaut=new ContreAttaqueDefaut();
-        IContreAttaque intelligent=new ContreAttaqueIntelligent();
-        IContreAttaque random=new ContreAttaqueRandom();
-        List<IContreAttaque> liste =Arrays.asList(defaut,intelligent,random);
-        VieIMovableDecorator alien = new VieIMovableDecorator(createAlien(x, y), 2);
+        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
+        IContreAttaque random=new ContreAttaqueRandom(5);
+        
+        List<IContreAttaque> liste =Arrays.asList(defaut);
+        Random rand = new Random();
+        IContreAttaque element= liste.get(rand.nextInt(liste.size()));
+        
+        
+        VieIMovableDecorator alien = new VieIMovableDecorator(new AlienShip(game, x, y, spriteStore.getSprite("alien"), element),2);
+
+        
+        //faire un random dans la liste pour return un des truc
+        
         return alien;
     }
     

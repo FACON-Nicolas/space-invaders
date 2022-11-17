@@ -23,8 +23,7 @@ public class ContreAttaqueIntelligent extends ContreAttaqueStrategie {
     private boolean isNear = false;
     private IMovable target;
     
-    public ContreAttaqueIntelligent(IMovable movable, SpaceInvadersGame game, IMovable target) {
-        super(movable, game);
+    public ContreAttaqueIntelligent(SpaceInvadersGame game, IMovable target) {
         this.target = target;
     }
 

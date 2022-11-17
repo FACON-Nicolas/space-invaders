@@ -19,14 +19,17 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
  */
 public abstract class ContreAttaqueStrategie implements IContreAttaque {
     
-    protected IMovable movable;
+    protected  IMovable movable;
     
-    protected SpaceInvadersGame game;
+    protected  SpaceInvadersGame game;
     
-    protected ContreAttaqueStrategie(IMovable movable, SpaceInvadersGame game) {
-        this.movable = movable;
-        this.game = game;
+    protected AlienShip alien;
+    
+    protected ContreAttaqueStrategie() {
     }
-
+    
+    public void initAlien(AlienShip alien) {
+        this.alien=alien;
+    }
 }
 

@@ -26,8 +26,7 @@ public class ContreAttaqueRandom extends ContreAttaqueStrategie {
     
     private int proba;
     
-    public ContreAttaqueRandom(IMovable movable, SpaceInvadersGame game, int proba) {
-        super(movable, game);
+    public ContreAttaqueRandom(int proba) {
         this.proba = proba;
     }
 

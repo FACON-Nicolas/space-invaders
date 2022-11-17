@@ -24,9 +24,7 @@ public class ContreAttaqueDefaut extends ContreAttaqueStrategie {
     
     private double lastShot = 0;
     
-    
-    public ContreAttaqueDefaut(IMovable movable, SpaceInvadersGame game) {
-        super(movable, game);
+    public ContreAttaqueDefaut() {
     }
 
     /*
