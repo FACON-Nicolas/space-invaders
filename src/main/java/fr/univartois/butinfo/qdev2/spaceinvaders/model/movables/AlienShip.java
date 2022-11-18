@@ -25,6 +25,8 @@ public class AlienShip extends AbstractMovable {
                     new KeyFrame(Duration.millis(16), e -> element.fireShot()));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
+            this.contreAttaque.initAlien(this);
+            this.contreAttaque.initGame(game);
         } else timeline = null;
     }
 

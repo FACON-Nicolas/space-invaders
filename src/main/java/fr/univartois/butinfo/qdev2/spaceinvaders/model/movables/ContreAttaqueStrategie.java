@@ -23,13 +23,16 @@ public abstract class ContreAttaqueStrategie implements IContreAttaque {
     
     protected  SpaceInvadersGame game;
     
-    protected AlienShip alien;
     
     protected ContreAttaqueStrategie() {
     }
     
     public void initAlien(AlienShip alien) {
-        this.alien=alien;
+        this.movable=alien;
+    }
+    
+    public void initGame(SpaceInvadersGame game) {
+        this.game=game;
     }
 }
 
