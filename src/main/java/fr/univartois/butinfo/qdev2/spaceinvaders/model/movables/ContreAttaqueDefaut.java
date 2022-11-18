@@ -33,10 +33,14 @@ public class ContreAttaqueDefaut extends ContreAttaqueStrategie {
      * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque#fireShot()
      */
     public void fireShot() {
-        if (lastShot == 0 || System.currentTimeMillis() - lastShot >= SHOT_TEMP) {
-            lastShot = System.currentTimeMillis();
-            game.addMovable(new Shoot(game, movable.getX(), movable.getY() + movable.getSprite().getHeight()+10, SpriteStore.getInstance().getSprite("shot")));
-       }
+        if (!movable.isConsumed()) {
+            if (lastShot == 0 || System.currentTimeMillis() - lastShot >= SHOT_TEMP) {
+                lastShot = System.currentTimeMillis();
+                Shoot shoot = new Shoot(game, movable.getX(), movable.getY() + movable.getSprite().getHeight()+10, SpriteStore.getInstance().getSprite("shot"));
+                shoot.verticalSpeed *= -1;
+                game.addMovable(shoot);
+           }
+        }
     }
 }
 

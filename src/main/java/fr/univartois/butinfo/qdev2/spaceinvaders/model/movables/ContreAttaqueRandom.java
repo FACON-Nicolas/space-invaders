@@ -36,9 +36,13 @@ public class ContreAttaqueRandom extends ContreAttaqueStrategie {
      * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque#fireShot()
      */
     public void fireShot() {
-        int n = RANDOM.nextInt(0, proba);
-        if (n == 0) {
-            game.addMovable(new Shoot(game, movable.getX(), movable.getY() + movable.getSprite().getHeight()+10, SpriteStore.getInstance().getSprite("shot")));
+        if (!movable.isConsumed()) {
+            int n = RANDOM.nextInt(0, proba);
+            if (n == 0) {
+                Shoot shoot = new Shoot(game, movable.getX(), movable.getY() + movable.getSprite().getHeight()+10, SpriteStore.getInstance().getSprite("shot"));
+                shoot.verticalSpeed *= -1;
+                game.addMovable(shoot);
+            }
         }
     }
 
