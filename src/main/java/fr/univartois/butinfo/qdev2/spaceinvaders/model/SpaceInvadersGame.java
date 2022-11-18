@@ -17,6 +17,7 @@
 package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
@@ -235,9 +236,15 @@ public final class SpaceInvadersGame {
         // TODO Créer le vaisseau du joueur et les aliens.
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
-        
+        Random nb=new Random();
         for (int i=0 ; i<5;i++) {
-            addMovable(factory.createAlien(getTopLimit(), getLeftLimit()));
+            int nombre=nb.nextInt(11);
+            if(nombre<5) {
+                addMovable(factory.createAlien(getTopLimit(), getLeftLimit()));
+            }
+            else {
+                addMovable(factory.createAlienVie(getTopLimit(), getLeftLimit()));
+            }
             nbRemainingAliens ++;
         }
     }
@@ -325,7 +332,7 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-    private void addMovable(IMovable object) {
+    public void addMovable(IMovable object) {
         movableObjects.add(object);
         controller.addMovable(object);
     }
