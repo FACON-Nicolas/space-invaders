@@ -2,7 +2,7 @@
  * Ce fichier fait partie du projet Space Invaders.
  *
  * (c) 2022 gasto
- * Tous droits réservés.
+ * Tous droits rï¿½servï¿½s.
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
@@ -11,6 +11,7 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 
 /**
  * Le type AlienResistant
@@ -26,6 +27,28 @@ public abstract class IMovableDecorator implements IMovable{
     
     public IMovableDecorator(IMovable decore) {
         this.decore=decore;
+    }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#isConsumedProperty()
+     */
+    @Override
+    public BooleanProperty isConsumedProperty() {
+        // TODO Auto-generated method stub.
+        return decore.isConsumedProperty();
+    }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#getSpriteProperty()
+     */
+    @Override
+    public ObjectProperty<Sprite> getSpriteProperty() {
+        // TODO Auto-generated method stub.
+        return getDecore().getSpriteProperty();
     }
     
     
@@ -139,16 +162,6 @@ public abstract class IMovableDecorator implements IMovable{
         return decore.isConsumed();
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#isConsumedProperty()
-     */
-    @Override
-    public BooleanProperty isConsumedProperty() {
-        // TODO Auto-generated method stub.
-        return decore.isConsumedProperty();
-    }
 
     /*
      * (non-Javadoc)
