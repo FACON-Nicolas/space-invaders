@@ -15,7 +15,6 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AlienShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueDefaut;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueIntelligent;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueRandom;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueStrategie;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
@@ -63,11 +62,11 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createAlien(int x, int y) {
-        IContreAttaque defaut=new ContreAttaqueDefaut();
-        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
-        //IContreAttaque random=new ContreAttaqueRandom(game, 5);
+        //IContreAttaque defaut=new ContreAttaqueDefaut();
+        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game);
+        IContreAttaque random=new ContreAttaqueRandom(160);
         
-        List<IContreAttaque> liste =Arrays.asList(defaut);
+        List<IContreAttaque> liste =Arrays.asList(random);
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
@@ -76,11 +75,11 @@ public class MovableFactory implements IMovableFactory {
     }
     
     public VieIMovableDecorator createAlienVie(int x, int y) {  
-        IContreAttaque defaut=new ContreAttaqueDefaut();
+        //IContreAttaque defaut=new ContreAttaqueDefaut();
         //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
-        IContreAttaque random=new ContreAttaqueRandom(5);
+        IContreAttaque random=new ContreAttaqueRandom(160);
         
-        List<IContreAttaque> liste =Arrays.asList(defaut);
+        List<IContreAttaque> liste =Arrays.asList(random);
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
