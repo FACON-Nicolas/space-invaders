@@ -6,13 +6,13 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 
 public class AlienShip extends AbstractMovable{
 
+    // TODO Peut être rajouter la stratégie dans le constructeur
     private final IStratMove stratM;
 
 
-    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
+    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, IStratMove stratM) {
         super(game, xPosition, yPosition, sprite);
-        // TODO Changer le mouvement appliqué dans la factory qui créer les aliens
-        stratM = new RandomMove();
+        this.stratM = stratM;
         stratM.initialSpeed(this);
     }
 
