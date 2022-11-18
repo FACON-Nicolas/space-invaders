@@ -21,8 +21,10 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -68,7 +70,7 @@ public abstract class AbstractMovable implements IMovable {
     /**
      * L'instance de {@link Sprite} reprÈsentant cet objet.
      */
-    protected final Sprite sprite;
+    protected final ObjectProperty<Sprite> sprite;
 
     /**
      * CrÈe une nouvelle instance de AbstractMovable.
@@ -84,7 +86,7 @@ public abstract class AbstractMovable implements IMovable {
         this.xPosition = new SimpleDoubleProperty(xPosition);
         this.yPosition = new SimpleDoubleProperty(yPosition);
         this.consumed = new SimpleBooleanProperty(false);
-        this.sprite = sprite;
+        this.sprite = new SimpleObjectProperty<>(sprite);
     }
 
     /*
@@ -94,7 +96,7 @@ public abstract class AbstractMovable implements IMovable {
      */
     @Override
     public int getWidth() {
-        return sprite.getWidth();
+        return sprite.get().getWidth();
     }
 
     /*
@@ -104,7 +106,7 @@ public abstract class AbstractMovable implements IMovable {
      */
     @Override
     public int getHeight() {
-        return sprite.getHeight();
+        return sprite.get().getHeight();
     }
 
     /*
@@ -248,12 +250,14 @@ public abstract class AbstractMovable implements IMovable {
     public boolean move(long delta) {
         // On met ‡ jour la position de l'objet sur l'axe x.
         int limitMaxX = game.getRightLimit() - getWidth();
-        double newX = updatePosition(xPosition.get(), horizontalSpeed, delta, game.getLeftLimit(), limitMaxX);
+        double newX = updatePosition(xPosition.get(), horizontalSpeed, delta, game.getLeftLimit(),
+                limitMaxX);
         xPosition.set(newX);
 
         // On met ‡ jour la position de l'objet sur l'axe y.
         int limitMaxY = game.getBottomLimit() - getHeight();
-        double newY = updatePosition(yPosition.get(), verticalSpeed, delta, game.getTopLimit(), limitMaxY);
+        double newY = updatePosition(yPosition.get(), verticalSpeed, delta, game.getTopLimit(),
+                limitMaxY);
         yPosition.set(newY);
 
         if ((newX == game.getLeftLimit()) || (newX == limitMaxX)) {
@@ -302,10 +306,32 @@ public abstract class AbstractMovable implements IMovable {
     /*
      * (non-Javadoc)
      *
+     * @see
+     * fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#setSprite(fr.univartois.
+     * butinfo.qdev2.spaceinvaders.view.Sprite)
+     */
+    @Override
+    public void setSprite(Sprite sprite) {
+        this.sprite.set(sprite);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
      * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#getSprite()
      */
     @Override
     public Sprite getSprite() {
+        return sprite.get();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#getSpriteProperty()
+     */
+    @Override
+    public ObjectProperty<Sprite> getSpriteProperty() {
         return sprite;
     }
 
@@ -324,7 +350,54 @@ public abstract class AbstractMovable implements IMovable {
         }
 
         Rectangle rectangle = new Rectangle(getX(), getY(), getWidth(), getHeight());
-        return rectangle.intersects(other.getX(), other.getY(), other.getWidth(), other.getHeight());
+        return rectangle.intersects(other.getX(), other.getY(), other.getWidth(),
+                other.getHeight());
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#self()
+     */
+    @Override
+    public IMovable self() {
+        return this;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            // Les deux objets sont forc√©ment diff√©rents.
+            return false;
+        }
+
+        if (obj == this) {
+            // Les deux objets sont strictement identiques.
+            return true;
+        }
+
+        if (obj instanceof IMovable other) {
+            // On compare les "vrais objets".
+            return other.self() == self();
+        }
+
+        // L'objet donn√© n'est pas d'une classe compatible.
+        return false;
     }
 
 }

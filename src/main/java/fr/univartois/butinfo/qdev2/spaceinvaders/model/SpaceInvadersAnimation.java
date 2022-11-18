@@ -29,6 +29,16 @@ import javafx.animation.AnimationTimer;
  * @version 0.1.0
  */
 final class SpaceInvadersAnimation extends AnimationTimer {
+    
+    /**
+     * Le délai minimum entre deux dépôts de bonus.
+     */
+    private static final long BONUS_DELAY = 20_000;
+    
+    /**
+     * La partie de Space-Invaders en cours.
+     */
+    private final SpaceInvadersGame game;
 
     /**
      * La liste des objets pouvant se déplacer dans le jeu.
@@ -38,15 +48,34 @@ final class SpaceInvadersAnimation extends AnimationTimer {
     /**
      * Le timestamp de la dernière mise à jour des différentes position des objets.
      */
-    private long previousTimestamp = -1;
+    private long previousTimestamp;
+
+    /**
+     * Le timestamp du dernier dépôt de bonus.
+     */
+    private long previousBonus;
 
     /**
      * Crée une nouvelle instance de SpaceInvadersAnimation.
      *
+     * @param game La partie de Space-Invaders en cours.
      * @param movableObjects La liste des objets pouvant se déplacer dans le jeu.
      */
-    public SpaceInvadersAnimation(List<IMovable> movableObjects) {
+    public SpaceInvadersAnimation(SpaceInvadersGame game, List<IMovable> movableObjects) {
+        this.game = game;
         this.movableObjects = movableObjects;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see javafx.animation.AnimationTimer#start()
+     */
+    @Override
+    public void start() {
+        previousTimestamp = -1;
+        previousBonus = -1;
+        super.start();
     }
 
     /*
@@ -59,6 +88,7 @@ final class SpaceInvadersAnimation extends AnimationTimer {
         // Lors de la première mise à jour, on se contente de conserver le timestamp.
         if (previousTimestamp < 0) {
             previousTimestamp = now;
+            previousBonus = now;
             return;
         }
 
@@ -69,6 +99,7 @@ final class SpaceInvadersAnimation extends AnimationTimer {
         // On met à jour la position des objets.
         moveObjects(delta);
         checkCollisions();
+        dropBonus(now);
     }
 
     /**
@@ -94,6 +125,19 @@ final class SpaceInvadersAnimation extends AnimationTimer {
                     other.collidedWith(movable);
                 }
             }
+        }
+    }
+
+    /**
+     * Dépose un bonus dans le jeu, si le délai minimum est écoulé.
+     *
+     * @param now L'heure actuelle.
+     */
+    private void dropBonus(long now) {
+        long delay = (now - previousBonus) / 1000000;
+        if (delay >= BONUS_DELAY) {
+            game.dropBonus();
+            previousBonus = now;
         }
     }
 

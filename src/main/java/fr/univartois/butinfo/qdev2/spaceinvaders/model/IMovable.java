@@ -19,6 +19,7 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 
 /**
  * L'interface {@link IMovable} définit le contrat des éléments du jeu capables
@@ -104,15 +105,6 @@ public interface IMovable {
     boolean isConsumed();
 
     /**
-     * Donne la propriété de cet objet liée au fait qu'il a été ou non consommé.
-     *
-     * @return La propriété de cet objet liée au fait qu'il a été ou non consommé.
-     *
-     * @see #isConsumed()
-     */
-    BooleanProperty isConsumedProperty();
-
-    /**
      * Modifie la vitesse horizontale de cet objet.
      *
      * @param speed La nouvelle vitesse horizontale de cet objet (en pixels/s).
@@ -139,6 +131,10 @@ public interface IMovable {
      * @return La vitesse verticale de cet objet (en pixels/s).
      */
     double getVerticalSpeed();
+    
+    ObjectProperty<Sprite> getSpriteProperty();
+    
+    BooleanProperty isConsumedProperty();
 
     /**
      * Déplace cet objet pour le mettre à sa nouvelle position, calculée à partir du temps
@@ -148,7 +144,8 @@ public interface IMovable {
      *        millisecondes).
      *
      * @return Si l'objet a pu être déplacé.
-     *         Si ce n'est pas le cas, il a atteint le bord de la fenêtre, et est donc bloqué.
+     *         Si ce n'est pas le cas, il a atteint le bord de la fenêtre, et est donc
+     *         bloqué.
      */
     boolean move(long timeDelta);
 
@@ -180,4 +177,11 @@ public interface IMovable {
     void hitAlien();
     
     void receiveShot();
+    /**
+     * Donne l'objet réel qui implémente cette interface.
+     *
+     * @return L'objet réel.
+     */
+    IMovable self();
+
 }
