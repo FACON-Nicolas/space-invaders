@@ -6,7 +6,6 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 
 public class AlienShip extends AbstractMovable{
 
-    // TODO Peut être rajouter la stratégie dans le constructeur
     private final IStratMove stratM;
 
 
