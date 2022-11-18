@@ -7,6 +7,7 @@
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 
 /**
  * Le type IContreAttaque
@@ -18,6 +19,9 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 public interface IContreAttaque {
     
     void fireShot();
-
+    
+    void initAlien(AlienShip alien);
+    
+    void initGame(SpaceInvadersGame game);
 }
 

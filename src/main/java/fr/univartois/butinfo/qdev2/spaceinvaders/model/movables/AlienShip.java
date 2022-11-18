@@ -10,21 +10,23 @@ import javafx.util.Duration;
 
 public class AlienShip extends AbstractMovable {
 
+    private IContreAttaque contreAttaque;
     private final IStratMove stratM;
-    private ContreAttaqueStrategie contreAttaque;
+
     private final Timeline timeline;
 
-
-    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, ContreAttaqueStrategie contreAttaque, IStratMove stratM) {
+    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, IContreAttaque element, IStratMove stratM) {
         super(game, xPosition, yPosition, sprite);
         this.stratM = stratM;
         stratM.initialSpeed(this);
-        this.contreAttaque = contreAttaque;
-        if (contreAttaque != null) {
+        this.contreAttaque = element;
+        if (element != null) {
             timeline = new Timeline(
-                    new KeyFrame(Duration.millis(16), e -> contreAttaque.fireShot()));
+                    new KeyFrame(Duration.millis(16), e -> element.fireShot()));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
+            this.contreAttaque.initAlien(this);
+            this.contreAttaque.initGame(game);
         } else timeline = null;
     }
 
