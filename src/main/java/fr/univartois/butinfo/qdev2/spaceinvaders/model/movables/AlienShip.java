@@ -3,37 +3,41 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
-public class AlienShip extends AbstractMovable{
+public class AlienShip extends AbstractMovable {
 
-    public static final int H_SPEED = 75;
-    public static final int V_SPEED = 1;
+    private IContreAttaque contreAttaque;
+    private final IStratMove stratM;
 
-    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
+    private final Timeline timeline;
+
+    public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, IContreAttaque element, IStratMove stratM) {
         super(game, xPosition, yPosition, sprite);
-        super.setHorizontalSpeed(H_SPEED);
-        super.setVerticalSpeed(V_SPEED);
+        this.stratM = stratM;
+        stratM.initialSpeed(this);
+        this.contreAttaque = element;
+        if (element != null) {
+            timeline = new Timeline(
+                    new KeyFrame(Duration.millis(16), e -> element.fireShot()));
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.play();
+            this.contreAttaque.initAlien(this);
+            this.contreAttaque.initGame(game);
+        } else timeline = null;
     }
 
     @Override
     public boolean move(long delta) {
-        // On met à jour la position de l'objet sur l'axe x.
-        int limitMaxX = game.getRightLimit() - getWidth();
-        double newX = updatePosition(xPosition.get(), horizontalSpeed, delta, game.getLeftLimit(), limitMaxX);
-        xPosition.set(newX);
+        boolean isMoving = stratM.move(this, game, delta);
+        if (!isMoving) return false;
 
-        // On met à jour la position de l'objet sur l'axe y.
+        // Si l'alien touche atteint le joueur
         int limitMaxY = game.getBottomLimit() - getHeight();
-        double newY = updatePosition(yPosition.get(), verticalSpeed, delta, game.getTopLimit(), limitMaxY);
-        yPosition.set(newY);
-
-        if ((newX == game.getLeftLimit()) || (newX == limitMaxX)) {
-            // Rebond + augmentation de la vitesse
-            this.setHorizontalSpeed( - (this.getHorizontalSpeed() * 1.02));
-            return false;
-        }
-
-        if ((newY == game.getTopLimit()) || (newY == limitMaxY)) {
+        if ((yPosition.get() == game.getTopLimit()) || (yPosition.get() == limitMaxY)) {
             // L'objet a atteint la limite sur l'axe y.
             // Fin de la partie
             game.alienReachedPlanet();

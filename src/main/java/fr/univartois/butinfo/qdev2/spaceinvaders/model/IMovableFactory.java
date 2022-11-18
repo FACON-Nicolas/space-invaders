@@ -16,6 +16,7 @@
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 
@@ -54,7 +55,8 @@ public interface IMovableFactory {
      * @return L'alien qui a été créé.
      */
     IMovable createAlien(int x, int y);
-
+    
+    VieIMovableDecorator createAlienVie(int x, int y);
     /**
      * Crée un nouvel objet pouvant se déplacer et représentant un vaisseau (allié).
      *
