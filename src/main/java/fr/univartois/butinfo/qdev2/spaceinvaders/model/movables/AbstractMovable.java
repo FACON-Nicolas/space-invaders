@@ -1,17 +1,17 @@
 /**
- * Ce logiciel est distribué à des fins éducatives.
+ * Ce logiciel est distribuï¿½ ï¿½ des fins ï¿½ducatives.
  *
- * Il est fourni "tel quel", sans garantie d’aucune sorte, explicite
- * ou implicite, notamment sans garantie de qualité marchande, d’adéquation
- * à un usage particulier et d’absence de contrefaçon.
- * En aucun cas, les auteurs ou titulaires du droit d’auteur ne seront
- * responsables de tout dommage, réclamation ou autre responsabilité, que ce
- * soit dans le cadre d’un contrat, d’un délit ou autre, en provenance de,
- * consécutif à ou en relation avec le logiciel ou son utilisation, ou avec
- * d’autres éléments du logiciel.
+ * Il est fourni "tel quel", sans garantie dï¿½aucune sorte, explicite
+ * ou implicite, notamment sans garantie de qualitï¿½ marchande, dï¿½adï¿½quation
+ * ï¿½ un usage particulier et dï¿½absence de contrefaï¿½on.
+ * En aucun cas, les auteurs ou titulaires du droit dï¿½auteur ne seront
+ * responsables de tout dommage, rï¿½clamation ou autre responsabilitï¿½, que ce
+ * soit dans le cadre dï¿½un contrat, dï¿½un dï¿½lit ou autre, en provenance de,
+ * consï¿½cutif ï¿½ ou en relation avec le logiciel ou son utilisation, ou avec
+ * dï¿½autres ï¿½lï¿½ments du logiciel.
  *
- * (c) 2022 Romain Wallon - Université d'Artois.
- * Tous droits réservés.
+ * (c) 2022 Romain Wallon - Universitï¿½ d'Artois.
+ * Tous droits rï¿½servï¿½s.
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
@@ -29,7 +29,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * La classe {@link AbstractMovable} fournit une implantation de base pour tous les objets
- * élémentaires pouvant se déplacer dans le jeu.
+ * ï¿½lï¿½mentaires pouvant se dï¿½placer dans le jeu.
  *
  * @author Romain Wallon
  *
@@ -38,7 +38,7 @@ import javafx.scene.shape.Rectangle;
 public abstract class AbstractMovable implements IMovable {
 
     /**
-     * Le jeu dans lequel cet objet évolue.
+     * Le jeu dans lequel cet objet ï¿½volue.
      */
     protected final SpaceInvadersGame game;
 
@@ -53,7 +53,7 @@ public abstract class AbstractMovable implements IMovable {
     protected final DoubleProperty yPosition;
 
     /**
-     * Si cet objet a été consommé.
+     * Si cet objet a ï¿½tï¿½ consommï¿½.
      */
     protected final BooleanProperty consumed;
 
@@ -68,17 +68,17 @@ public abstract class AbstractMovable implements IMovable {
     protected double verticalSpeed;
 
     /**
-     * L'instance de {@link Sprite} représentant cet objet.
+     * L'instance de {@link Sprite} reprï¿½sentant cet objet.
      */
     protected final ObjectProperty<Sprite> sprite;
 
     /**
-     * Crée une nouvelle instance de AbstractMovable.
+     * Crï¿½e une nouvelle instance de AbstractMovable.
      *
-     * @param game Le jeu dans lequel l'objet évolue.
+     * @param game Le jeu dans lequel l'objet ï¿½volue.
      * @param xPosition La position en x initiale de l'objet.
      * @param yPosition La position en y initiale de l'objet.
-     * @param sprite L'instance de {@link Sprite} représentant l'objet.
+     * @param sprite L'instance de {@link Sprite} reprï¿½sentant l'objet.
      */
     protected AbstractMovable(SpaceInvadersGame game, double xPosition,
             double yPosition, Sprite sprite) {
@@ -248,13 +248,13 @@ public abstract class AbstractMovable implements IMovable {
      */
     @Override
     public boolean move(long delta) {
-        // On met à jour la position de l'objet sur l'axe x.
+        // On met ï¿½ jour la position de l'objet sur l'axe x.
         int limitMaxX = game.getRightLimit() - getWidth();
         double newX = updatePosition(xPosition.get(), horizontalSpeed, delta, game.getLeftLimit(),
                 limitMaxX);
         xPosition.set(newX);
 
-        // On met à jour la position de l'objet sur l'axe y.
+        // On met ï¿½ jour la position de l'objet sur l'axe y.
         int limitMaxY = game.getBottomLimit() - getHeight();
         double newY = updatePosition(yPosition.get(), verticalSpeed, delta, game.getTopLimit(),
                 limitMaxY);
@@ -280,39 +280,27 @@ public abstract class AbstractMovable implements IMovable {
      *
      * @param current La position courante de l'objet.
      * @param speed La vitesse actuelle de l'objet.
-     * @param delta Le temps qui s'est écoulé depuis la dernière mise à jour de la
+     * @param delta Le temps qui s'est ï¿½coulï¿½ depuis la derniï¿½re mise ï¿½ jour de la
      *        position de cet objet.
-     * @param limitMin La limite inférieure pour la position de l'objet.
-     * @param limitMax La limite supérieure pour la position de l'objet.
+     * @param limitMin La limite infï¿½rieure pour la position de l'objet.
+     * @param limitMax La limite supï¿½rieure pour la position de l'objet.
      *
-     * @return La nouvelle position de l'objet après la mise à jour.
+     * @return La nouvelle position de l'objet aprï¿½s la mise ï¿½ jour.
      */
     protected static double updatePosition(double current, double speed, long delta,
             int limitMin, int limitMax) {
         double newPosition = current + (delta * speed) / 1000;
 
         if (newPosition < limitMin) {
-            // Lorsque la limite inférieure est atteinte, on s'arrête à cette limite.
+            // Lorsque la limite infï¿½rieure est atteinte, on s'arrï¿½te ï¿½ cette limite.
             newPosition = limitMin;
 
         } else if (newPosition > limitMax) {
-            // Lorsque la limite supérieure est atteinte, on s'arrête à cette limite.
+            // Lorsque la limite supï¿½rieure est atteinte, on s'arrï¿½te ï¿½ cette limite.
             newPosition = limitMax;
         }
 
         return newPosition;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#setSprite(fr.univartois.
-     * butinfo.qdev2.spaceinvaders.view.Sprite)
-     */
-    @Override
-    public void setSprite(Sprite sprite) {
-        this.sprite.set(sprite);
     }
 
     /*
@@ -344,7 +332,7 @@ public abstract class AbstractMovable implements IMovable {
     @Override
     public boolean isCollidingWith(IMovable other) {
         if (isConsumed() || other.isConsumed()) {
-            // L'un des deux objets au moins est déjà consommé.
+            // L'un des deux objets au moins est dï¿½jï¿½ consommï¿½.
             // Il ne peut donc pas y avoir de collision.
             return false;
         }

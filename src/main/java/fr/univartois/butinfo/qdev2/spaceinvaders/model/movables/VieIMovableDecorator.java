@@ -2,12 +2,13 @@
  * Ce fichier fait partie du projet Space Invaders.
  *
  * (c) 2022 gasto
- * Tous droits réservés.
+ * Tous droits rï¿½servï¿½s.
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 
 /**
  * Le type VieIMovableDecorator
@@ -42,7 +43,7 @@ public class VieIMovableDecorator extends IMovableDecorator{
 
 
     /**
-     * Crée une nouvelle instance de VieIMovableDecorator.
+     * Crï¿½e une nouvelle instance de VieIMovableDecorator.
      * @param decore
      */
     public VieIMovableDecorator(IMovable decore,int vie) {
@@ -65,6 +66,19 @@ public class VieIMovableDecorator extends IMovableDecorator{
         if (vie <= 0)
             getDecore().receiveShot();
         
+    }
+
+
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#self()
+     */
+    @Override
+    public IMovable self() {
+        // TODO Auto-generated method stub.
+        return this;
     }
 
 }
