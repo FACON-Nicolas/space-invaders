@@ -1,41 +1,46 @@
 /**
- * Ce fichier fait partie du projet space-invaders.
+ * Ce fichier fait partie du projet projet-2022-2023.
  *
- * (c) 2022 Elsa
+ * (c) 2022 nicolas
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
+package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AbstractMovable;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 
 /**
- * Le type PlayerShip
+ * Le type Bonus
  *
- * @author Elsa
+ * @author nicolas
  *
  * @version 0.1.0
  */
-public class PlayerShip extends AbstractMovable {
+public abstract class AbstractBonus extends AbstractMovable {
     
-    public static final int H_SPEED = 150;
-
+    public static final int BONUS_SPEED = -100;
     
     /**
-     * Crée une nouvelle instance de PlayerShip.
+     * Crée une nouvelle instance de Bonus.
      * @param game
      * @param xPosition
      * @param yPosition
      * @param sprite
      */
-    public PlayerShip(SpaceInvadersGame game, double xPosition, double yPosition,
-            Sprite sprite) {
-        // TODO Auto-generated constructor stub.
+    public AbstractBonus(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
-        super.setHorizontalSpeed(H_SPEED);
+    }
+
+    public void dropBonus() {
+        // TODO Auto-generated method stub.
+        
     }
 
     /*
@@ -45,7 +50,7 @@ public class PlayerShip extends AbstractMovable {
      */
     @Override
     public void collidedWith(IMovable other) {
-        other.hitAlien();
+        // TODO Auto-generated method stub.
         
     }
 
@@ -56,7 +61,7 @@ public class PlayerShip extends AbstractMovable {
      */
     @Override
     public void hitAlien() {
-        game.playerIsDead();
+        // TODO Auto-generated method stub.
         
     }
 
@@ -67,16 +72,13 @@ public class PlayerShip extends AbstractMovable {
      */
     @Override
     public void receiveShot() {
-        game.reducePlayerLife();
+        // TODO Auto-generated method stub.
         
     }
     
-    public void receiveBonus(AbstractBonus bonus) {
-        if (!bonus.isConsumed())
-            bonus.giveBonus(this);
-            bonus.consume();
-    }
-
+    public abstract void giveBonus(PlayerShip player);
+    
+    
 
 }
 

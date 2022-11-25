@@ -363,5 +363,23 @@ public final class SpaceInvadersGame {
         }
         movableObjects.clear();
     }
+    
+    
+    /**
+     * Donne l'attribut life de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut life de cette instance de SpaceInvadersGame.
+     */
+    public int getLife() {
+        return life.get();
+    }
+    
+    
+    /**
+     * 
+     */
+    public void setLife(int life) {
+        this.life.set(life);
+    }
 
 }
