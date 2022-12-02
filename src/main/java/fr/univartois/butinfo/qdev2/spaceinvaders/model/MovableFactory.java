@@ -18,12 +18,15 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueInt
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueRandom;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.DefaultMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IEtatVaisseau;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IStratMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.RandomMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VaisseauVulnerable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 
 /**
  * Le type MovableFactory
@@ -36,7 +39,7 @@ public class MovableFactory implements IMovableFactory {
     
     private ISpriteStore spriteStore;
     private SpaceInvadersGame game;
-
+    private IEtatVaisseau etat;
     /*
      * (non-Javadoc)
      *
@@ -118,7 +121,8 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createShip(int x, int y) {
-        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"));
+        IEtatVaisseau truc= new VaisseauVulnerable(game,etat);
+        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"),truc);
     }
     
     /*

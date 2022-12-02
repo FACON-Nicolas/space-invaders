@@ -7,7 +7,7 @@ Pour pouvoir développer votre propre implantation de ce projet, vous devez
 en créer une **divergence** en cliquant sur le bouton `Fork` en haut à droite
 de cette page.
 
-Lorsque ce sera fait, vous pourrez invitez les membres de votre groupe en tant
+Lorsque ce sera fait, vous pourrez inviter les membres de votre groupe en tant
 que *Developer* pour vous permettre de travailler ensemble sur ce projet.
 
 ## Consignes
@@ -16,6 +16,8 @@ Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
 dans le développement de votre projet.
 
 - [Lancement du projet](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP03)
+- [Des patrons de conception dans le Space-Invaders (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP04)
+- [Des patrons de conception dans le Space-Invaders (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP05)
 
 ## Aperçu
 
@@ -86,7 +88,9 @@ interface IMovable {
     + {abstract} setVerticalSpeed(double) : void
     + {abstract} getVerticalSpeed() : double
     + {abstract} move(long) : boolean
+    + {abstract} setSprite(Sprite) : void
     + {abstract} getSprite() : Sprite
+    + {abstract} getSpriteProperty() : ObjectProperty<Sprite>
     + {abstract} isCollidingWith(IMovable) : boolean
     + {abstract} collidedWith(IMovable) : void
 }
@@ -193,7 +197,9 @@ abstract class AbstractMovable implements IMovable {
     + setVerticalSpeed(double) : void
     + getVerticalSpeed() : double
     + move(long) : boolean
+    + setSprite(Sprite) : void
     + getSprite() : Sprite
+    + getSpriteProperty() : ObjectProperty<Sprite>
     + isCollidingWith(IMovable) : boolean
 }
 

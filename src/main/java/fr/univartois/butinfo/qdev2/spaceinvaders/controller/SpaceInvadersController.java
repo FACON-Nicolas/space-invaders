@@ -241,6 +241,9 @@ public final class SpaceInvadersController implements ISpaceInvadersController {
         view.yProperty().bind(movable.getYProperty());
         movingPane.getChildren().add(view);
 
+        // Lorsque le sprite de l'objet change, son image doit changer également.
+        movable.getSpriteProperty().addListener((p, o, n) -> view.setImage(n.getImage()));
+
         // Lorsque l'objet est consommé, il n'est plus affiché.
         movable.isConsumedProperty().addListener((p, o, n) -> {
             if (n == Boolean.TRUE) {

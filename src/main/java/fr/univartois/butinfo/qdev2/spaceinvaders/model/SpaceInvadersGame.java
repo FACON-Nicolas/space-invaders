@@ -105,7 +105,7 @@ public final class SpaceInvadersGame {
     /**
      * L'animation du jeu, qui s'assure que les différents objets se déplacent.
      */
-    private final AnimationTimer animation = new SpaceInvadersAnimation(movableObjects);
+    private final AnimationTimer animation = new SpaceInvadersAnimation(this, movableObjects);
 
     /**
      * Crée une nouvelle instance de SpaceInvadersGame.
@@ -250,6 +250,13 @@ public final class SpaceInvadersGame {
     }
 
     /**
+     * Choisit aléatoirement un bonus et le place dans le jeu à une position aléatoire.
+     */
+    public void dropBonus() {
+        // TODO Créer le bonus.
+    }
+
+    /**
      * Déplace le vaisseau du joueur vers la gauche.
      */
     public void moveLeft() {
@@ -307,7 +314,15 @@ public final class SpaceInvadersGame {
             playerIsDead();
         }
     }
-
+    
+    public int getLife() {
+        return life.get();
+    }
+    
+    public void setLife(int life) {
+        this.life.set(life);
+    }
+    
     /**
      * Termine la partie lorsque le joueur est tué.
      */
@@ -357,4 +372,16 @@ public final class SpaceInvadersGame {
         movableObjects.clear();
     }
 
+    
+    /**
+     * Donne l'attribut spriteStore de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut spriteStore de cette instance de SpaceInvadersGame.
+     */
+    public ISpriteStore getSpriteStore() {
+        return spriteStore;
+    }
+
+    
+    
 }

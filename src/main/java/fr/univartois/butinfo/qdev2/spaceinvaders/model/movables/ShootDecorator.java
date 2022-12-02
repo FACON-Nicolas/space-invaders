@@ -1,6 +1,8 @@
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import javafx.beans.property.ObjectProperty;
 
 public class ShootDecorator extends IMovableDecorator {
 
@@ -27,5 +29,16 @@ public class ShootDecorator extends IMovableDecorator {
 			other.receiveShot();
 		}
 	}
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#self()
+     */
+    @Override
+    public IMovable self() {
+        // TODO Auto-generated method stub.
+        return this;
+    }
 
 }
