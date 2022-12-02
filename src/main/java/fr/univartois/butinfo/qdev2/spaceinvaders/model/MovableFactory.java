@@ -79,7 +79,6 @@ public class MovableFactory implements IMovableFactory {
         IStratMove randomMove=new RandomMove();
         
         List<IStratMove> listeMove= Arrays.asList(bounce,defautMove,randomMove);
-        Random rande = new Random();
         IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
         
         IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove);

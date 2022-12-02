@@ -233,17 +233,28 @@ public final class SpaceInvadersGame {
         // On commence par enlever tous les éléments mobiles encore présents.
         clearAllMovables();
 
-        // TODO Créer le vaisseau du joueur et les aliens.
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
         Random nb=new Random();
-        for (int i=0 ; i<5;i++) {
-            int nombre=nb.nextInt(11);
-            if(nombre<5) {
-                addMovable(factory.createAlien(getTopLimit(), getLeftLimit()));
+        int nbAliens = 25;
+        int nbAliensParLignes = 12;
+        int distanceEntreLigne = 30;
+        for (int i=0 ; i<nbAliens;i++) {
+            double n = i % nbAliensParLignes + 1.0;
+            int ligneCourante = i / nbAliensParLignes;
+            double N;
+            if(ligneCourante == (nbAliens / nbAliensParLignes)){
+                N = nbAliens % nbAliensParLignes;
+            } else {
+                N = nbAliensParLignes;
+            }
+
+            int nombre=nb.nextInt(nbAliens*2);
+            if(nombre<nbAliens) {
+                addMovable(factory.createAlien((int) (getTopLimit() + width * (n / (N+1))), getLeftLimit() + (i/nbAliensParLignes) * distanceEntreLigne));
             }
             else {
-                addMovable(factory.createAlienVie(getTopLimit(), getLeftLimit()));
+                addMovable(factory.createAlienVie((int) (getTopLimit() + width * (n / (N+1))), getLeftLimit() + (i/nbAliensParLignes) * distanceEntreLigne));
             }
             nbRemainingAliens ++;
         }
