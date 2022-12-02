@@ -22,10 +22,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AddHealthBonus;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.FastBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -40,7 +43,7 @@ public final class SpaceInvadersGame {
     /**
      * La vitesse du vaisseau du joueur lorsqu'il se déplace (en pixels/s).
      */
-    private static final double SHIP_SPEED = 150;
+    public static final DoubleProperty SHIP_SPEED = new SimpleDoubleProperty();
 
     /**
      * La temporisation contraignant le temps entre deux tirs successifs (en
@@ -255,7 +258,9 @@ public final class SpaceInvadersGame {
      */
     public void dropBonus() {
         Random random = new Random();
-        List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, random.nextInt(getRightLimit()), 100));
+        double x = random.nextInt(getRightLimit());
+        double y = 100;
+        List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, x, y), new FastBonus(this, x, y));
         AbstractBonus bonus = lesBonus.get(random.nextInt(lesBonus.size()));
         addMovable(bonus);
     }
@@ -264,14 +269,14 @@ public final class SpaceInvadersGame {
      * Déplace le vaisseau du joueur vers la gauche.
      */
     public void moveLeft() {
-        ship.setHorizontalSpeed(-SHIP_SPEED);
+        ship.setHorizontalSpeed(-SHIP_SPEED.get());
     }
 
     /**
      * Déplace le vaisseau du joueur vers la droite.
      */
     public void moveRight() {
-        ship.setHorizontalSpeed(SHIP_SPEED);
+        ship.setHorizontalSpeed(SHIP_SPEED.get());
     }
 
     /**
