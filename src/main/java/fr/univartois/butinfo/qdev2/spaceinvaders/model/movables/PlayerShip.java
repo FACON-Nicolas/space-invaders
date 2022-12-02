@@ -71,10 +71,14 @@ public class PlayerShip extends AbstractMovable {
         
     }
     
-    public void receiveBonus(AbstractBonus bonus) {
-        if (!bonus.isConsumed())
-            bonus.giveBonus(this);
-            bonus.consume();
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#hitBonus()
+     */
+    @Override
+    public void hitBonus(AbstractBonus bonus) {
+        bonus.giveBonus(this);
     }
 
 
