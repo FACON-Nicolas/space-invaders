@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AddHealthBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
@@ -241,8 +243,7 @@ public final class SpaceInvadersGame {
             int nombre=nb.nextInt(11);
             if(nombre<5) {
                 addMovable(factory.createAlien(getTopLimit(), getLeftLimit()));
-            }
-            else {
+            } else {
                 addMovable(factory.createAlienVie(getTopLimit(), getLeftLimit()));
             }
             nbRemainingAliens ++;
@@ -253,7 +254,10 @@ public final class SpaceInvadersGame {
      * Choisit aléatoirement un bonus et le place dans le jeu à une position aléatoire.
      */
     public void dropBonus() {
-        // TODO Créer le bonus.
+        Random random = new Random();
+        List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, random.nextInt(getRightLimit()), 100));
+        AbstractBonus bonus = lesBonus.get(random.nextInt(lesBonus.size()));
+        addMovable(bonus);
     }
 
     /**
