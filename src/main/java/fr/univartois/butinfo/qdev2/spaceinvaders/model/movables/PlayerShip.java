@@ -37,6 +37,7 @@ public class PlayerShip extends AbstractMovable {
         super(game, xPosition, yPosition, sprite);
         super.setHorizontalSpeed(H_SPEED);
     }
+   
 
     /*
      * (non-Javadoc)

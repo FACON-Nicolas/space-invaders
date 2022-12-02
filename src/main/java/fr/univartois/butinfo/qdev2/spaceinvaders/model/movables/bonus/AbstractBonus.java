@@ -47,8 +47,25 @@ public abstract class AbstractBonus extends AbstractMovable {
     @Override
     public void collidedWith(IMovable other) {
         other.hitBonus(this);
-        
     }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AbstractMovable#move(long)
+     */
+    @Override
+    public boolean move(long delta) {
+        // TODO Auto-generated method stub.
+        super.move(delta);
+
+        int limitMaxY = game.getBottomLimit() - getHeight();
+        if (limitMaxY <= yPosition.get()){
+            consume();
+            return false;
+        } return true;
+    }
+   
 
     /*
      * (non-Javadoc)
