@@ -10,6 +10,7 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 
 /**
  * Le type AddHealthBonus
@@ -20,9 +21,8 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
  */
 public class AddHealthBonus extends AbstractBonus {
     
-    public AddHealthBonus(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
-        super(game, xPosition, yPosition, sprite);
-        
+    public AddHealthBonus(SpaceInvadersGame game, double xPosition, double yPosition) {
+        super(game, xPosition, yPosition, SpriteStore.getInstance().getSprite("heart"));
     }
 
     /*
@@ -32,7 +32,10 @@ public class AddHealthBonus extends AbstractBonus {
      */
     @Override
     public void giveBonus(PlayerShip player) {
-        game.setLife(game.getLife()+1);
+        if (!isConsumed()) {
+            game.setLife(game.getLife()+1);
+            consume();
+        }
     }
 
 }

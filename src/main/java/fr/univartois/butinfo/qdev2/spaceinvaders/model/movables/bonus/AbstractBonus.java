@@ -25,7 +25,7 @@ import javafx.beans.property.ObjectProperty;
  */
 public abstract class AbstractBonus extends AbstractMovable {
     
-    public static final int BONUS_SPEED = -100;
+    public static final double BONUS_SPEED = 100;
     
     /**
      * Crée une nouvelle instance de Bonus.
@@ -36,11 +36,7 @@ public abstract class AbstractBonus extends AbstractMovable {
      */
     public AbstractBonus(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
-    }
-
-    public void dropBonus() {
-        // TODO Auto-generated method stub.
-        
+        setVerticalSpeed(BONUS_SPEED);
     }
 
     /*
@@ -50,7 +46,7 @@ public abstract class AbstractBonus extends AbstractMovable {
      */
     @Override
     public void collidedWith(IMovable other) {
-        // TODO Auto-generated method stub.
+        other.hitBonus(this);
         
     }
 
