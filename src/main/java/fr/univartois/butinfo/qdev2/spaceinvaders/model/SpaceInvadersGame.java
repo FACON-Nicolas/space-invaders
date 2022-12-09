@@ -314,7 +314,15 @@ public final class SpaceInvadersGame {
             playerIsDead();
         }
     }
-
+    
+    public int getLife() {
+        return life.get();
+    }
+    
+    public void setLife(int life) {
+        this.life.set(life);
+    }
+    
     /**
      * Termine la partie lorsque le joueur est tué.
      */
@@ -364,4 +372,16 @@ public final class SpaceInvadersGame {
         movableObjects.clear();
     }
 
+    
+    /**
+     * Donne l'attribut spriteStore de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut spriteStore de cette instance de SpaceInvadersGame.
+     */
+    public ISpriteStore getSpriteStore() {
+        return spriteStore;
+    }
+
+    
+    
 }
