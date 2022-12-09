@@ -312,13 +312,11 @@ public abstract class AbstractMovable implements IMovable {
     public Sprite getSprite() {
         return sprite.get();
     }
-<<<<<<< src/main/java/fr/univartois/butinfo/qdev2/spaceinvaders/model/movables/AbstractMovable.java
     
     public void setSprite(Sprite sprite) {
          this.sprite.set(sprite);
     }
-=======
->>>>>>> src/main/java/fr/univartois/butinfo/qdev2/spaceinvaders/model/movables/AbstractMovable.java
+
 
     /*
      * (non-Javadoc)
