@@ -16,6 +16,9 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 /**
  * Le type vaisseauVulnerable
@@ -53,35 +56,13 @@ public class VaisseauVulnerable  implements IEtatVaisseau {
     /*
      * (non-Javadoc)
      *
-     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IEtatVaisseau#getSprite()
-     */
-    public Sprite getSprite() {
-        // TODO Auto-generated method stub.
-        return sprite;
-    }
-    
-    
-    
-    /*
-     * (non-Javadoc)
-     *
      * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IEtatVaisseau#receiveShot()
      */
     @Override
-    public IEtatVaisseau receiveShot() {
+    public void receiveShot() {
         game.reducePlayerLife();
-        etat=this.nextState();
-        return etat;
-
     }
 
-    /**
-     * @param sprite2
-     */
-    private void setSprite(Sprite sprite2) {
-        // TODO Auto-generated method stub.
-        this.sprite=sprite2;
-    }
-
+    
 }
 

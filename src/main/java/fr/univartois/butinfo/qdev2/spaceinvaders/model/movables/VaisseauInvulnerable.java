@@ -55,9 +55,10 @@ public class VaisseauInvulnerable implements IEtatVaisseau  {
      * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IEtatVaisseau#receiveShot()
      */
     @Override
-    public IEtatVaisseau receiveShot() { 
-        return this ;
+    public void receiveShot() {
+        // TODO Auto-generated method stub.
+        
     }
-
+    
 }
 

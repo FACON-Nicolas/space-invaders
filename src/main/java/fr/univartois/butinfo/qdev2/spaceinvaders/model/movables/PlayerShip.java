@@ -14,8 +14,11 @@ import java.util.concurrent.TimeUnit;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.util.Duration;
 
 /**
  * Le type PlayerShip
@@ -30,7 +33,7 @@ public class PlayerShip extends AbstractMovable {
     
     public static final int H_SPEED = 150;
 
-    
+    private boolean bool=true;
     /**
      * Crée une nouvelle instance de PlayerShip.
      * @param game
@@ -67,12 +70,6 @@ public class PlayerShip extends AbstractMovable {
         game.playerIsDead();
         
     }
-    /*
-    public void changerEtat(IEtatVaisseau etat) {
-        etat=etat.nextState();
-        this.setSprite(etat.getSprite());
-    }
-    */
     
     /*
      * (non-Javadoc)
@@ -81,15 +78,45 @@ public class PlayerShip extends AbstractMovable {
      */
     @Override
     public void receiveShot() {
-        etat=etat.receiveShot();
-        this.setSprite(etat.getSprite());
-        this.setSprite(etat.getSprite());
-        if((game.getLife()!=0)){
-            ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-            executorService.schedule(() -> etat=etat.nextState(), 3, TimeUnit.SECONDS);
-            ScheduledExecutorService executorService2 = Executors.newSingleThreadScheduledExecutor();
-            executorService2.schedule(() ->  this.setSprite(game.getSpriteStore().getSprite("ship")), 3, TimeUnit.SECONDS);
+        etat.receiveShot();
+        if(bool==true) {
+            if(game.getLife()!=0){
+                bool=false;
+                etat=etat.nextState();
+                sprite.set(game.getSpriteStore().getSprite("ufo"));
+                long timeSeconds = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
+                
+                ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+                executorService.schedule(() -> {
+                    etat=etat.nextState();
+                    sprite.set(game.getSpriteStore().getSprite("ship"));
+                    bool=true;
+                }, 3, TimeUnit.SECONDS);
             }
+        }
     }
+
+    
+    /**
+     * Donne l'attribut etat de cette instance de PlayerShip.
+     *
+     * @return L'attribut etat de cette instance de PlayerShip.
+     */
+    public IEtatVaisseau getEtat() {
+        return etat;
+    }
+
+    
+    /**
+     * Modifie l'attribut etat de cette instance de PlayerShip.
+     *
+     * @param etat La nouvelle valeur de l'attribut etat pour cette instance de PlayerShip.
+     */
+    public void setEtat(IEtatVaisseau etat) {
+        this.etat = etat;
+    }
+    
+    
+    
 }
 

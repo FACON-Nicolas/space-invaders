@@ -21,12 +21,8 @@ public interface IEtatVaisseau {
 
     IEtatVaisseau nextState();
 
-    /**
-     * @return
-     */
-    Sprite getSprite();
-    
-    IEtatVaisseau receiveShot();
+   void receiveShot();
+
     
 }
 
