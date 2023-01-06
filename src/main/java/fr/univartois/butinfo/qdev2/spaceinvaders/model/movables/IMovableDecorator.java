@@ -63,6 +63,7 @@ public abstract class IMovableDecorator implements IMovable{
         return decore.getWidth();
     }
 
+    
     /*
      * (non-Javadoc)
      *
@@ -279,7 +280,7 @@ public abstract class IMovableDecorator implements IMovable{
      *
      * @return L'attribut decore de cette instance de IMovableDecorator.
      */
-    protected IMovable getDecore() {
+    public IMovable getDecore() {
         return decore;
     }
 
