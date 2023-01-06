@@ -25,6 +25,7 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.RandomMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VaisseauVulnerable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
+import fr.univartois.butinfo.qdev2.spaceinvaders.mur.Mur;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 
@@ -112,6 +113,11 @@ public class MovableFactory implements IMovableFactory {
         //faire un random dans la liste pour return un des truc
         
         return alien;
+    }
+    
+    @Override
+    public IMovable createMur(double x,double y) {
+    	return new Mur(game , x, y, spriteStore.getSprite("bricks") );
     }
     
     /*

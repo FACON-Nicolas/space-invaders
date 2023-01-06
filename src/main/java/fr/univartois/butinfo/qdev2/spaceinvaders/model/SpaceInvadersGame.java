@@ -232,8 +232,13 @@ public final class SpaceInvadersGame {
     private void createMovables() {
         // On commence par enlever tous les éléments mobiles encore présents.
         clearAllMovables();
-
-        // TODO Créer le vaisseau du joueur et les aliens.
+        Random random=new Random();
+        int nbMurs = random.nextInt(10);
+        for(int i=0; i<nbMurs ; i++) {
+        	addMovable(factory.createMur(i*getRightLimit()/nbMurs,3*getBottomLimit()/5));
+        }
+        addMovable(factory.createMur(getRightLimit(),3*getBottomLimit()/5));
+        
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
         Random nb=new Random();
