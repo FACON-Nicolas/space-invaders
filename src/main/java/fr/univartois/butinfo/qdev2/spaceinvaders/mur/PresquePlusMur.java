@@ -7,7 +7,7 @@ public class PresquePlusMur implements IMursState{
 
 	@Override
 	public IMursState nextState() {
-		return new MurUnPeuDetruit();
+		return new MurDetruit();
 }
 	@Override
 	public void handle(Mur m) {

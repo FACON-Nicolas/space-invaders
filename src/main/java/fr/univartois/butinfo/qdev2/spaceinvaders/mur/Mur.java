@@ -9,7 +9,7 @@ public class Mur extends AbstractMovable{
 	
 	private IMursState etat;
 
-	protected Mur(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
+	public Mur(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
 		super(game, xPosition, yPosition, sprite);
 		this.etat = new MurNeuf();
 	}
