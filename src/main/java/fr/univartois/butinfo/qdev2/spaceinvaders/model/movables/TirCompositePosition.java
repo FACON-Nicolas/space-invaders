@@ -33,7 +33,6 @@ public class TirCompositePosition extends ContreAttaqueStrategie {
         
         list = List.of(
                 new ContreAttaqueDefaut(),
-                new ContreAttaqueIntelligent(game, alien),
                 new ContreAttaqueRandom(proba)
         );
         

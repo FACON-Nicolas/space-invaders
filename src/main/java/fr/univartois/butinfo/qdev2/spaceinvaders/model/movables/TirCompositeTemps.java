@@ -36,7 +36,6 @@ public class TirCompositeTemps extends ContreAttaqueStrategie {
         
         list = List.of(
             new ContreAttaqueDefaut(),
-            new ContreAttaqueIntelligent(game, alien),
             new ContreAttaqueRandom(proba)
         );
         

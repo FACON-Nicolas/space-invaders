@@ -91,7 +91,7 @@ public class MovableFactory implements IMovableFactory {
         //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
         IContreAttaque random=new ContreAttaqueRandom(160);
         
-        List<IContreAttaque> liste =Arrays.asList(random);
+        List<IContreAttaque> liste =Arrays.asList(random, defaut);
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
