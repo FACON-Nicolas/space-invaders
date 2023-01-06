@@ -14,7 +14,6 @@ import java.util.Random;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AlienShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.BounceMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueDefaut;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueIntelligent;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueRandom;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.DefaultMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque;
@@ -22,6 +21,8 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IStratMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.RandomMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.TirCompositePosition;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.TirCompositeTemps;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 
@@ -66,11 +67,11 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createAlien(int x, int y) {
-        IContreAttaque defaut=new ContreAttaqueDefaut();
-        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game);
-        IContreAttaque random=new ContreAttaqueRandom(160);
+        IContreAttaque temps = new TirCompositeTemps(game, 160);
+        IContreAttaque position = new TirCompositePosition(game, 160);
         
-        List<IContreAttaque> liste =Arrays.asList(random,defaut);
+        List<IContreAttaque> liste =Arrays.asList(temps, position);
+        
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
@@ -82,16 +83,17 @@ public class MovableFactory implements IMovableFactory {
         Random rande = new Random();
         IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
         
-        IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove);
+        AlienShip alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove);
+                
+        element.initAlien(alien);
         return alien;
     }
     
     public VieIMovableDecorator createAlienVie(int x, int y) {  
-        IContreAttaque defaut=new ContreAttaqueDefaut();
-        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
-        IContreAttaque random=new ContreAttaqueRandom(160);
+        IContreAttaque temps = new TirCompositeTemps(game, 160);
+        IContreAttaque position = new TirCompositePosition(game, 160);
         
-        List<IContreAttaque> liste =Arrays.asList(random, defaut);
+        List<IContreAttaque> liste =Arrays.asList(temps, position);
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
@@ -104,8 +106,7 @@ public class MovableFactory implements IMovableFactory {
         IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
         
         VieIMovableDecorator alien = new VieIMovableDecorator(new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove),2);
-
-        
+        element.initAlien((AlienShip) alien.getDecore());        
         //faire un random dans la liste pour return un des truc
         
         return alien;
