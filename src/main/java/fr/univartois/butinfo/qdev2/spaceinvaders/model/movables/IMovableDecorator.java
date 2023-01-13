@@ -25,7 +25,7 @@ public abstract class IMovableDecorator implements IMovable{
     private IMovable decore;
     
     
-    public IMovableDecorator(IMovable decore) {
+    protected IMovableDecorator(IMovable decore) {
         this.decore=decore;
     }
     

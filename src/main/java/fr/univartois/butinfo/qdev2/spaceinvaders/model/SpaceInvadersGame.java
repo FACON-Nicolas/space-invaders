@@ -34,7 +34,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @version 0.1.0
  */
 public final class SpaceInvadersGame {
-
+	private Random nb=new Random();
     /**
      * La vitesse du vaisseau du joueur lorsqu'il se déplace (en pixels/s).
      */
@@ -236,7 +236,7 @@ public final class SpaceInvadersGame {
         // TODO Créer le vaisseau du joueur et les aliens.
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
-        Random nb=new Random();
+
         for (int i=0 ; i<5;i++) {
             int nombre=nb.nextInt(11);
             if(nombre<5) {

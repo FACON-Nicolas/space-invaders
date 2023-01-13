@@ -39,7 +39,7 @@ public final class SpriteStore implements ISpriteStore {
      */
     private final Map<String, Sprite> spriteCache = new HashMap<>();
     
-    private final static SpriteStore INSTANCE = new SpriteStore();
+    private static final  SpriteStore INSTANCE = new SpriteStore();
     
     private SpriteStore() {
         

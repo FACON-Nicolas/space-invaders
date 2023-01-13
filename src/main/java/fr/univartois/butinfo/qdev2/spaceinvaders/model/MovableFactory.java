@@ -36,6 +36,7 @@ public class MovableFactory implements IMovableFactory {
     
     private ISpriteStore spriteStore;
     private SpaceInvadersGame game;
+    protected Random rand = new Random();
 
     /*
      * (non-Javadoc)
@@ -67,11 +68,10 @@ public class MovableFactory implements IMovableFactory {
     @Override
     public IMovable createAlien(int x, int y) {
         IContreAttaque defaut=new ContreAttaqueDefaut();
-        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game);
         IContreAttaque random=new ContreAttaqueRandom(160);
         
         List<IContreAttaque> liste =Arrays.asList(random,defaut);
-        Random rand = new Random();
+        
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
         IStratMove bounce=new BounceMove();
@@ -79,7 +79,6 @@ public class MovableFactory implements IMovableFactory {
         IStratMove randomMove=new RandomMove();
         
         List<IStratMove> listeMove= Arrays.asList(bounce,defautMove,randomMove);
-        Random rande = new Random();
         IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
         
         IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove);
@@ -88,11 +87,9 @@ public class MovableFactory implements IMovableFactory {
     
     public VieIMovableDecorator createAlienVie(int x, int y) {  
         IContreAttaque defaut=new ContreAttaqueDefaut();
-        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
         IContreAttaque random=new ContreAttaqueRandom(160);
         
         List<IContreAttaque> liste =Arrays.asList(random);
-        Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
         IStratMove bounce=new BounceMove();
@@ -100,7 +97,6 @@ public class MovableFactory implements IMovableFactory {
         IStratMove randomMove=new RandomMove();
         
         List<IStratMove> listeMove= Arrays.asList(bounce,defautMove,randomMove);
-        Random rande = new Random();
         IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
         
         VieIMovableDecorator alien = new VieIMovableDecorator(new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove),2);
