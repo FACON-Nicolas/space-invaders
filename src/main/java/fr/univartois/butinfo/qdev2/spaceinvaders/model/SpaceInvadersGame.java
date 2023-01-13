@@ -23,6 +23,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AddHealthBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.FastBonus;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.InvulnerabilityBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
@@ -265,7 +266,7 @@ public final class SpaceInvadersGame {
         Random random = new Random();
         double x = random.nextInt(getRightLimit());
         double y = 100;
-        List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, x, y), new FastBonus(this, x, y));
+        List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, x, y), new FastBonus(this, x, y), new InvulnerabilityBonus(this, x, y));
         AbstractBonus bonus = lesBonus.get(random.nextInt(lesBonus.size()));
         addMovable(bonus);
     }
@@ -327,14 +328,6 @@ public final class SpaceInvadersGame {
         if (life.get() == 0) {
             playerIsDead();
         }
-    }
-    
-    public int getLife() {
-        return life.get();
-    }
-    
-    public void setLife(int life) {
-        this.life.set(life);
     }
     
     /**
