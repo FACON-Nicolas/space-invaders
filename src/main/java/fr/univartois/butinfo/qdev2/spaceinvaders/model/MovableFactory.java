@@ -127,8 +127,8 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createShip(int x, int y) {
-        IEtatVaisseau truc= new VaisseauVulnerable(game,etat);
-        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"),truc);
+        IEtatVaisseau state= new VaisseauVulnerable(game,etat);
+        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"),state);
     }
     
     /*
