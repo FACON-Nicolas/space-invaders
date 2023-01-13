@@ -2,7 +2,7 @@
  * Ce fichier fait partie du projet Space Invaders.
  *
  * (c) 2022 gasto
- * Tous droits réservés.
+ * Tous droits rï¿½servï¿½s.
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
@@ -58,6 +58,16 @@ public class VaisseauInvulnerable implements IEtatVaisseau  {
     public void receiveShot() {
         // TODO Auto-generated method stub.
         
+    }
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IEtatVaisseau#getState()
+     */
+    @Override
+    public EtatVaisseau getState() {
+        // TODO Auto-generated method stub.
+        return EtatVaisseau.INVULNERABLE;
     }
     
 }
