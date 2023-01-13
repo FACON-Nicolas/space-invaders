@@ -72,7 +72,6 @@ public class TirCompositePosition extends ContreAttaqueStrategie {
      */
     @Override
     public void fireShot() {
-        System.out.println(screenPart.get());
         list.get(screenPart.get()).fireShot();        
     }
 }
