@@ -312,6 +312,11 @@ public abstract class AbstractMovable implements IMovable {
     public Sprite getSprite() {
         return sprite.get();
     }
+    
+    public void setSprite(Sprite sprite) {
+         this.sprite.set(sprite);
+    }
+
 
     /*
      * (non-Javadoc)

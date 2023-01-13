@@ -232,8 +232,13 @@ public final class SpaceInvadersGame {
     private void createMovables() {
         // On commence par enlever tous les éléments mobiles encore présents.
         clearAllMovables();
-
-        // TODO Créer le vaisseau du joueur et les aliens.
+        Random random=new Random();
+        int nbMurs = random.nextInt(10);
+        for(int i=0; i<nbMurs ; i++) {
+        	addMovable(factory.createMur(i*getRightLimit()/nbMurs,3*getBottomLimit()/5));
+        }
+        addMovable(factory.createMur(getRightLimit(),3*getBottomLimit()/5));
+        
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
         Random nb=new Random();
@@ -314,7 +319,15 @@ public final class SpaceInvadersGame {
             playerIsDead();
         }
     }
-
+    
+    public int getLife() {
+        return life.get();
+    }
+    
+    public void setLife(int life) {
+        this.life.set(life);
+    }
+    
     /**
      * Termine la partie lorsque le joueur est tué.
      */
@@ -364,4 +377,16 @@ public final class SpaceInvadersGame {
         movableObjects.clear();
     }
 
+    
+    /**
+     * Donne l'attribut spriteStore de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut spriteStore de cette instance de SpaceInvadersGame.
+     */
+    public ISpriteStore getSpriteStore() {
+        return spriteStore;
+    }
+
+    
+    
 }
