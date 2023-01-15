@@ -23,6 +23,7 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IStratMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.RandomMove;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.StratMoveComposite;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VaisseauVulnerable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
@@ -77,15 +78,10 @@ public class MovableFactory implements IMovableFactory {
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
-        IStratMove bounce=new BounceMove();
-        IStratMove defautMove=new DefaultMove();
-        IStratMove randomMove=new RandomMove();
+        IStratMove mouvementComposite=new StratMoveComposite(game);
+
         
-        List<IStratMove> listeMove= Arrays.asList(bounce,defautMove,randomMove);
-        Random rande = new Random();
-        IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
-        
-        IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove);
+        IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,mouvementComposite);
         return alien;
     }
     
@@ -98,15 +94,10 @@ public class MovableFactory implements IMovableFactory {
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
-        IStratMove bounce=new BounceMove();
-        IStratMove defautMove=new DefaultMove();
-        IStratMove randomMove=new RandomMove();
-        
-        List<IStratMove> listeMove= Arrays.asList(bounce,defautMove,randomMove);
-        Random rande = new Random();
-        IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
-        
-        VieIMovableDecorator alien = new VieIMovableDecorator(new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove),2);
+        IStratMove mouvementComposite=new StratMoveComposite(game);
+
+
+        VieIMovableDecorator alien = new VieIMovableDecorator(new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,mouvementComposite),2);
 
         
         //faire un random dans la liste pour return un des truc
