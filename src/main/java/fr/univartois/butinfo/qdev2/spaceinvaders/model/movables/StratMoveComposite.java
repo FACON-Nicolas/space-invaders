@@ -46,12 +46,15 @@ public class StratMoveComposite implements IStratMove{
     public void initialSpeed(IMovable alien) {
         int position=alien.getX();
         if(position<(game.getWidth()/listeMove.size())) {
+            alien.setVerticalSpeed(1);
             defautMove.initialSpeed(alien);
         }
         else if (position>=game.getWidth()/listeMove.size() && position<(game.getWidth()/listeMove.size())*2) {
+            alien.setVerticalSpeed(100);
             bounce.initialSpeed(alien);
         }
         else {
+            alien.setVerticalSpeed(1);
             randomMove.initialSpeed(alien);
         }
 
@@ -67,13 +70,16 @@ public class StratMoveComposite implements IStratMove{
        
         int position=alien.getX();
         if(position<(game.getWidth()/listeMove.size())) {
+            alien.setVerticalSpeed(1);
             return defautMove.move(alien, game, delta);
         }
         else if (position>=game.getWidth()/listeMove.size() && position<(game.getWidth()/listeMove.size())*2) {
-            System.out.println("ratio");
+            alien.setVerticalSpeed(100);
             return bounce.move(alien, game, delta);
         }
         else {
+            alien.setVerticalSpeed(1);
+
             return randomMove.move(alien, game, delta);
         }
     
