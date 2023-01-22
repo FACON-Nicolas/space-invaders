@@ -107,7 +107,7 @@ public class MovableFactory implements IMovableFactory {
     }
     
     public IMovable createAlienSansTir(int x, int y) {
-        return new AlienShip(game, x, y, SpriteStore.getInstance().getSprite("alien"), null, null);
+        return new AlienShip(game, x, y, SpriteStore.getInstance().getSprite("alien"), null, new DefaultMove());
     }
     
     @Override
