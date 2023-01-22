@@ -9,7 +9,6 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 
 import java.util.Random;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 
 /**
  * Le type LevelFactory
@@ -25,6 +24,9 @@ public class LevelFactory implements ILevelFactory {
     private SpaceInvadersGame game;
     private IMovableFactory factory;
     private static final Random random = new Random();
+
+    private final int nbAliensParLignes = 12;
+    private final int distanceEntreLigne = 30;
     
     
     /**
@@ -35,6 +37,24 @@ public class LevelFactory implements ILevelFactory {
         this.factory = factory;
     }
 
+    /**
+     * Cette méthode permet d'aligner correctement les aliens à la manière d'un 'space-evenly' en CSS
+     */
+    private int[] coordonnesXYCreationAlien(int numAlien, int nbAliens) {
+        double n = numAlien % nbAliensParLignes + 1.0;
+        int ligneCourante = numAlien / nbAliensParLignes;
+        double N;
+        if(ligneCourante == (nbAliens / nbAliensParLignes)){
+            N = nbAliens % nbAliensParLignes;
+        } else {
+            N = nbAliensParLignes;
+        }
+
+        int x = (int) (game.getTopLimit() + game.getWidth() * (n / (N + 1)));
+        int y = game.getLeftLimit() + (numAlien / nbAliensParLignes) * distanceEntreLigne;
+        return new int[]{x, y};
+    }
+
 
     /*
      * (non-Javadoc)
@@ -43,10 +63,13 @@ public class LevelFactory implements ILevelFactory {
      */
     @Override
     public void createLevel1() {
-        int width = SpriteStore.getInstance().getSprite("alien").getWidth();
-        for (int i=0 ; i<5;i++)
-            game.addMovable(factory.createAlienSansTir(i * width, game.getLeftLimit()));
-        game.setNbRemainingAliens(5);
+        int nbAliens = 5;
+        for (int i=0 ; i<nbAliens;i++){
+            int[] xy = coordonnesXYCreationAlien(i, nbAliens);
+            game.addMovable(factory.createAlienSansTir(xy[0], xy[1]));
+        }
+
+        game.setNbRemainingAliens(nbAliens);
     }
 
 
@@ -57,11 +80,12 @@ public class LevelFactory implements ILevelFactory {
      */
     @Override
     public void createLevel2() {
-        int width = SpriteStore.getInstance().getSprite("alien").getWidth();
-        for (int i = 0; i < 7; i++) {
-            game.addMovable(factory.createAlien(i * width, game.getLeftLimit()));
-            game.setNbRemainingAliens(7);
+        int nbAliens = 7;
+        for (int i = 0; i < nbAliens; i++) {
+            int[] xy = coordonnesXYCreationAlien(i, nbAliens);
+            game.addMovable(factory.createAlien(xy[0], xy[1]));
         }
+        game.setNbRemainingAliens(nbAliens);
     }
 
 
@@ -72,11 +96,12 @@ public class LevelFactory implements ILevelFactory {
      */
     @Override
     public void createLevel3() {
-        int width = SpriteStore.getInstance().getSprite("alien").getWidth();
-        for (int i = 0; i < 10; i++) {
-            game.addMovable(factory.createAlienVie(i * width, game.getLeftLimit()));
-            game.setNbRemainingAliens(10);
+        int nbAliens = 10;
+        for (int i = 0; i < nbAliens; i++) {
+            int[] xy = coordonnesXYCreationAlien(i, nbAliens);
+            game.addMovable(factory.createAlienVie(xy[0], xy[1]));
         }
+        game.setNbRemainingAliens(nbAliens);
     }
 
 
@@ -87,16 +112,17 @@ public class LevelFactory implements ILevelFactory {
      */
     @Override
     public void createLevel4() {
-        int width = SpriteStore.getInstance().getSprite("alien").getWidth();
+        int nbAliens = 15;
         int nbMurs = random.nextInt(10);
         for(int i=0; i<=nbMurs ; i++) {
             game.addMovable(factory.createMur(i*game.getRightLimit()/nbMurs,3*game.getBottomLimit()/5));
         }
 
-        for (int i = 0; i < 15; i++) {
-            game.addMovable(factory.createAlienVie(i * width, game.getLeftLimit()));
-            game.setNbRemainingAliens(15);
+        for (int i = 0; i < nbAliens; i++) {
+            int[] xy = coordonnesXYCreationAlien(i, nbAliens);
+            game.addMovable(factory.createAlienVie(xy[0], xy[1]));
         }
+        game.setNbRemainingAliens(nbAliens);
     }
     
     /*

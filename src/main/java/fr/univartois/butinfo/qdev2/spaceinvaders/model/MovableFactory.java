@@ -68,10 +68,11 @@ public class MovableFactory implements IMovableFactory {
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
 
         IStratMove mouvementComposite=new StratMoveComposite(game);
-        
+
         AlienShip alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,mouvementComposite);
                 
         element.initAlien(alien);
+
         return alien;
     }
     

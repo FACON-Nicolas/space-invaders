@@ -17,11 +17,6 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBo
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.util.Duration;
 
 /**
  * Le type PlayerShip
