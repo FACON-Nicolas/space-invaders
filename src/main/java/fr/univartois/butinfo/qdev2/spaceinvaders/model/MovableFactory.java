@@ -11,22 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AlienShip;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.BounceMove;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueDefaut;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.ContreAttaqueRandom;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.DefaultMove;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IContreAttaque;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IEtatVaisseau;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IStratMove;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.PlayerShip;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.RandomMove;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Shoot;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.TirCompositePosition;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.TirCompositeTemps;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.*;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VaisseauVulnerable;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.VieIMovableDecorator;
 import fr.univartois.butinfo.qdev2.spaceinvaders.mur.Mur;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
@@ -80,12 +66,10 @@ public class MovableFactory implements IMovableFactory {
         
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
-        
-        IContreAttaque element= liste.get(rand.nextInt(liste.size()));
-        
+
         IStratMove mouvementComposite=new StratMoveComposite(game);
         
-        AlienShip alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove);
+        AlienShip alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,mouvementComposite);
                 
         element.initAlien(alien);
         return alien;
