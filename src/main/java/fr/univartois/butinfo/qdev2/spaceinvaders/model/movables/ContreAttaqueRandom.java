@@ -9,8 +9,6 @@ package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 
 import java.util.Random;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 
 /**

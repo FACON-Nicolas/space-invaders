@@ -37,7 +37,7 @@ public class AlienShip extends AbstractMovable {
 
         // Si l'alien touche atteint le joueur
         int limitMaxY = game.getBottomLimit() - getHeight();
-        if ((yPosition.get() == game.getTopLimit()) || (yPosition.get() == limitMaxY)) {
+        if (( yPosition.get() == limitMaxY)) {
             // L'objet a atteint la limite sur l'axe y.
             // Fin de la partie
             game.alienReachedPlanet();
