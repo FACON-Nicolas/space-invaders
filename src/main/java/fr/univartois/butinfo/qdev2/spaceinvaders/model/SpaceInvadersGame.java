@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AddHealthBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.FastBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.InvulnerabilityBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
