@@ -251,7 +251,7 @@ public final class SpaceInvadersGame {
         for (int i=0 ; i<5;i++) {
             int nombre=nb.nextInt(11);
             if(nombre<5) {
-                addMovable(factory.createAlien(getTopLimit(), getLeftLimit()));
+                addMovable(factory.createAlienSansTir(getTopLimit(), getLeftLimit()));
             } else {
                 addMovable(factory.createAlienVie(getTopLimit(), getLeftLimit()));
             }

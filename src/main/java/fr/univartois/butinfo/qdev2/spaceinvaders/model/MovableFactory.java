@@ -115,6 +115,10 @@ public class MovableFactory implements IMovableFactory {
         return alien;
     }
     
+    public IMovable createAlienSansTir(int x, int y) {
+        return new AlienShip(game, x, y, SpriteStore.getInstance().getSprite("alien"), null, null);
+    }
+    
     @Override
     public IMovable createMur(double x,double y) {
     	return new Mur(game , x, y, spriteStore.getSprite("bricks") );
