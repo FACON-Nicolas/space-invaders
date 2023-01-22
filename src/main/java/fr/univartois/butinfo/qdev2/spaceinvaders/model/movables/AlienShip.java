@@ -17,8 +17,9 @@ public class AlienShip extends AbstractMovable {
 
     public AlienShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite, IContreAttaque element, IStratMove stratM) {
         super(game, xPosition, yPosition, sprite);
-        this.stratM = stratM;
-        stratM.initialSpeed(this);
+//        this.stratM = stratM;
+        this.stratM = new DefaultMove();
+        this.stratM.initialSpeed(this);
         this.contreAttaque = element;
         if (element != null) {
             timeline = new Timeline(

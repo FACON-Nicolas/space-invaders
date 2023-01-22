@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AlienShip;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.Escadrille;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
@@ -236,6 +238,7 @@ public final class SpaceInvadersGame {
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
         Random nb=new Random();
+        Escadrille escadrille = new Escadrille();
         int nbAliens = 25;
         int nbAliensParLignes = 12;
         int distanceEntreLigne = 30;
@@ -250,14 +253,21 @@ public final class SpaceInvadersGame {
             }
 
             int nombre=nb.nextInt(nbAliens*2);
+            IMovable alienShip;
+            int x = (int) (getTopLimit() + width * (n / (N + 1)));
+            int y = getLeftLimit() + (i / nbAliensParLignes) * distanceEntreLigne;
+
             if(nombre<nbAliens) {
-                addMovable(factory.createAlien((int) (getTopLimit() + width * (n / (N+1))), getLeftLimit() + (i/nbAliensParLignes) * distanceEntreLigne));
+                alienShip = factory.createAlien(x, y);
             }
             else {
-                addMovable(factory.createAlienVie((int) (getTopLimit() + width * (n / (N+1))), getLeftLimit() + (i/nbAliensParLignes) * distanceEntreLigne));
+                alienShip = factory.createAlienVie(x, y);
             }
+            controller.addMovable(alienShip);
+            escadrille.addAlien(alienShip);
             nbRemainingAliens ++;
         }
+        movableObjects.add(escadrille);
     }
 
     /**
