@@ -2,7 +2,7 @@
  * Ce fichier fait partie du projet Space Invaders.
  *
  * (c) 2022 gasto
- * Tous droits réservés.
+ * Tous droits rï¿½servï¿½s.
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
@@ -36,7 +36,7 @@ public class VaisseauVulnerable  implements IEtatVaisseau {
     private IEtatVaisseau etat;
     
     public static final int H_SPEED = 150;
-
+    
     public VaisseauVulnerable(SpaceInvadersGame game,IEtatVaisseau etat)  {
         this.game=game;
         sprite = game.getSpriteStore().getSprite("ship");
@@ -50,7 +50,7 @@ public class VaisseauVulnerable  implements IEtatVaisseau {
      */
     public IEtatVaisseau nextState() {
         // TODO Auto-generated method stub.
-        return etat=new VaisseauInvulnerable(game, etat);
+        return new VaisseauInvulnerable(game, etat);
     }
 
     /*
@@ -61,6 +61,17 @@ public class VaisseauVulnerable  implements IEtatVaisseau {
     @Override
     public void receiveShot() {
         game.reducePlayerLife();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.IEtatVaisseau#getState()
+     */
+    @Override
+    public EtatVaisseau getState() {
+        // TODO Auto-generated method stub.
+        return EtatVaisseau.VULNERABLE;
     }
 
     

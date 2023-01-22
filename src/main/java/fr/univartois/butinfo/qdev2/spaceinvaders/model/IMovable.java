@@ -16,6 +16,7 @@
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -183,5 +184,9 @@ public interface IMovable {
      * @return L'objet réel.
      */
     IMovable self();
+    
+    default void hitBonus(AbstractBonus bonus) {
+        
+    }
 
 }

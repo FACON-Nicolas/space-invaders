@@ -42,6 +42,7 @@ public class MovableFactory implements IMovableFactory {
     
     private ISpriteStore spriteStore;
     private SpaceInvadersGame game;
+    protected Random rand = new Random();
     private IEtatVaisseau etat;
     /*
      * (non-Javadoc)
@@ -80,13 +81,9 @@ public class MovableFactory implements IMovableFactory {
         Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
-        IStratMove bounce=new BounceMove();
-        IStratMove defautMove=new DefaultMove();
-        IStratMove randomMove=new RandomMove();
+        IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
-        List<IStratMove> listeMove= Arrays.asList(bounce,defautMove,randomMove);
-        Random rande = new Random();
-        IStratMove elementMove=listeMove.get(rand.nextInt(listeMove.size()));
+        IStratMove mouvementComposite=new StratMoveComposite(game);
         
         AlienShip alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,elementMove);
                 
@@ -117,6 +114,10 @@ public class MovableFactory implements IMovableFactory {
         return alien;
     }
     
+    public IMovable createAlienSansTir(int x, int y) {
+        return new AlienShip(game, x, y, SpriteStore.getInstance().getSprite("alien"), null, new DefaultMove());
+    }
+    
     @Override
     public IMovable createMur(double x,double y) {
     	return new Mur(game , x, y, spriteStore.getSprite("bricks") );
@@ -129,8 +130,8 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createShip(int x, int y) {
-        IEtatVaisseau truc= new VaisseauVulnerable(game,etat);
-        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"),truc);
+        IEtatVaisseau state= new VaisseauVulnerable(game,etat);
+        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"),state);
     }
     
     /*

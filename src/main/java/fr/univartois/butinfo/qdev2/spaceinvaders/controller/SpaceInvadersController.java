@@ -174,6 +174,7 @@ public final class SpaceInvadersController implements ISpaceInvadersController {
                 // La partie démarre à la première touche appuyée.
                 started = true;
                 message.setVisible(false);
+                game.setLevel(game.getLevel()+1);
                 game.start();
 
             } else if (" ".equals(e.getCharacter())) {

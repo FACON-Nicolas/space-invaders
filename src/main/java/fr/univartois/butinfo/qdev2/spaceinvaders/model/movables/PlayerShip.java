@@ -13,7 +13,10 @@ import java.util.concurrent.TimeUnit;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
@@ -29,6 +32,8 @@ import javafx.util.Duration;
  */
 public class PlayerShip extends AbstractMovable {
     
+    public static final DoubleProperty h_speed = new SimpleDoubleProperty();
+
     private IEtatVaisseau etat;
     
     public static final int H_SPEED = 150;
@@ -45,9 +50,30 @@ public class PlayerShip extends AbstractMovable {
             Sprite sprite,IEtatVaisseau etat) {
         // TODO Auto-generated constructor stub.
         super(game, xPosition, yPosition, sprite);
+        super.setHorizontalSpeed(h_speed.get());
+        h_speed.bindBidirectional(game.SHIP_SPEED);
+        h_speed.set(150);
+        
         super.setHorizontalSpeed(H_SPEED);
         this.etat=etat;
     }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.AbstractMovable#getHorizontalSpeed()
+     */
+    @Override
+    public double getHorizontalSpeed() {
+        // TODO Auto-generated method stub.
+        return h_speed.get();
+    }
+    
+
+    public void setHorizontalSpeedPlayer(double speed) {
+        h_speed.set(speed);;
+    }
+   
 
     /*
      * (non-Javadoc)
@@ -94,6 +120,16 @@ public class PlayerShip extends AbstractMovable {
                 }, 3, TimeUnit.SECONDS);
             }
         }
+    }
+    
+    /*
+     * (non-Javadoc)
+     *
+     * @see fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable#hitBonus()
+     */
+    @Override
+    public void hitBonus(AbstractBonus bonus) {
+        bonus.giveBonus(this);
     }
 
     

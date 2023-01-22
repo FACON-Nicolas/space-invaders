@@ -1,8 +1,6 @@
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
 
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
-import javafx.beans.property.ObjectProperty;
 
 public class ShootDecorator extends IMovableDecorator {
 
@@ -21,6 +19,7 @@ public class ShootDecorator extends IMovableDecorator {
 		this.force = force;
 	}
 	
+	@Override
 	public void collidedWith(IMovable other) {
 		if (force == 1) {
 			super.collidedWith(other);

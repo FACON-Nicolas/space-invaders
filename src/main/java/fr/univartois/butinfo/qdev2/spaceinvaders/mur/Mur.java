@@ -31,5 +31,6 @@ public class Mur extends AbstractMovable{
 
 	@Override
 	public void collidedWith(IMovable other) {
+		// vide car collideWith 
 	}
 }
