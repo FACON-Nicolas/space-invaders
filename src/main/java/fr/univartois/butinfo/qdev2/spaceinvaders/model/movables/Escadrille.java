@@ -160,7 +160,6 @@ public class Escadrille implements IMovable {
             for (IMovable alien: aliens) {
                 alien.setHorizontalSpeed(-alien.getHorizontalSpeed());
             }
-//            this.setHorizontalSpeed(-this.getHorizontalSpeed());
         }
         return bloque;
     }
