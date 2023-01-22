@@ -20,10 +20,17 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AbstractBonus;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.AddHealthBonus;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.FastBonus;
+import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.InvulnerabilityBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -38,7 +45,7 @@ public final class SpaceInvadersGame {
     /**
      * La vitesse du vaisseau du joueur lorsqu'il se déplace (en pixels/s).
      */
-    private static final double SHIP_SPEED = 150;
+    public static final DoubleProperty SHIP_SPEED = new SimpleDoubleProperty();
 
     /**
      * La temporisation contraignant le temps entre deux tirs successifs (en
@@ -106,6 +113,9 @@ public final class SpaceInvadersGame {
      * L'animation du jeu, qui s'assure que les différents objets se déplacent.
      */
     private final AnimationTimer animation = new SpaceInvadersAnimation(this, movableObjects);
+    
+    private int level = 6;
+
 
     /**
      * Crée une nouvelle instance de SpaceInvadersGame.
@@ -184,6 +194,26 @@ public final class SpaceInvadersGame {
     public int getBottomLimit() {
         return height - 100;
     }
+    
+    
+    /**
+     * Donne l'attribut level de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut level de cette instance de SpaceInvadersGame.
+     */
+    public int getLevel() {
+        return level;
+    }
+    
+    
+    /**
+     * Modifie l'attribut level de cette instance de SpaceInvadersGame.
+     *
+     * @param level La nouvelle valeur de l'attribut level pour cette instance de SpaceInvadersGame.
+     */
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     /**
      * Associe à cette partie de Space-Invaders le contrôleur gérant l'affichage du jeu.
@@ -225,49 +255,65 @@ public final class SpaceInvadersGame {
         score.set(0);
         nbRemainingAliens = 0;
     }
-
+    
+    
+    /**
+     * Donne l'attribut nbRemainingAliens de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut nbRemainingAliens de cette instance de SpaceInvadersGame.
+     */
+    public int getNbRemainingAliens() {
+        return nbRemainingAliens;
+    }
+    
+    
+    /**
+     * Modifie l'attribut nbRemainingAliens de cette instance de SpaceInvadersGame.
+     *
+     * @param nbRemainingAliens La nouvelle valeur de l'attribut nbRemainingAliens pour cette instance de SpaceInvadersGame.
+     */
+    public void setNbRemainingAliens(int nbRemainingAliens) {
+        this.nbRemainingAliens = nbRemainingAliens;
+    }
+    
     /**
      * Crée les différents objets présents au début de la partie et pouvant se déplacer.
      */
     private void createMovables() {
         // On commence par enlever tous les éléments mobiles encore présents.
+        ILevelFactory levelFactory = new LevelFactory(this, factory);
         clearAllMovables();
-
-        // TODO Créer le vaisseau du joueur et les aliens.
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
-
-        for (int i=0 ; i<5;i++) {
-            int nombre=nb.nextInt(11);
-            if(nombre<5) {
-                addMovable(factory.createAlien(getTopLimit(), getLeftLimit()));
-            }
-            else {
-                addMovable(factory.createAlienVie(getTopLimit(), getLeftLimit()));
-            }
-            nbRemainingAliens ++;
-        }
+        levelFactory.createLevel(level);
     }
 
     /**
      * Choisit aléatoirement un bonus et le place dans le jeu à une position aléatoire.
      */
     public void dropBonus() {
-        // TODO Créer le bonus.
+       if (level > 1) {
+            Random random = new Random();
+            double x = random.nextInt(getRightLimit());
+            double y = 100;
+            List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, x, y), new FastBonus(this, x, y), new InvulnerabilityBonus(this, x, y));
+            AbstractBonus bonus = lesBonus.get(random.nextInt(lesBonus.size()));
+            addMovable(bonus);
+       }
     }
 
     /**
      * Déplace le vaisseau du joueur vers la gauche.
      */
     public void moveLeft() {
-        ship.setHorizontalSpeed(-SHIP_SPEED);
+        ship.setHorizontalSpeed(-SHIP_SPEED.get());
     }
 
     /**
      * Déplace le vaisseau du joueur vers la droite.
      */
     public void moveRight() {
-        ship.setHorizontalSpeed(SHIP_SPEED);
+        ship.setHorizontalSpeed(SHIP_SPEED.get());
     }
 
     /**
@@ -312,9 +358,10 @@ public final class SpaceInvadersGame {
         life.set(life.get()-1);
         if (life.get() == 0) {
             playerIsDead();
+            level = 0;
         }
     }
-
+    
     /**
      * Termine la partie lorsque le joueur est tué.
      */
@@ -332,6 +379,7 @@ public final class SpaceInvadersGame {
         // Interrompre la partie.
         animation.stop();
         controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");
+        level = 0;
     }
 
     /**
@@ -363,5 +411,35 @@ public final class SpaceInvadersGame {
         }
         movableObjects.clear();
     }
+    
+    
+    /**
+     * Donne l'attribut life de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut life de cette instance de SpaceInvadersGame.
+     */
+    public int getLife() {
+        return life.get();
+    }
+    
+    
+    /**
+     * 
+     */
+    public void setLife(int life) {
+        this.life.set(life);
+    }
 
+    
+    /**
+     * Donne l'attribut spriteStore de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut spriteStore de cette instance de SpaceInvadersGame.
+     */
+    public ISpriteStore getSpriteStore() {
+        return spriteStore;
+    }
+
+    
+    
 }
