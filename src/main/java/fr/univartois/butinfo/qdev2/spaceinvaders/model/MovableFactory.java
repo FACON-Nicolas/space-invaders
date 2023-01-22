@@ -106,6 +106,10 @@ public class MovableFactory implements IMovableFactory {
         return alien;
     }
     
+    public IMovable createAlienSansTir(int x, int y) {
+        return new AlienShip(game, x, y, SpriteStore.getInstance().getSprite("alien"), null, new DefaultMove());
+    }
+    
     @Override
     public IMovable createMur(double x,double y) {
     	return new Mur(game , x, y, spriteStore.getSprite("bricks") );
@@ -118,8 +122,8 @@ public class MovableFactory implements IMovableFactory {
      */
     @Override
     public IMovable createShip(int x, int y) {
-        IEtatVaisseau truc= new VaisseauVulnerable(game,etat);
-        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"),truc);
+        IEtatVaisseau state= new VaisseauVulnerable(game,etat);
+        return new PlayerShip(game, x, y, spriteStore.getSprite("ship"),state);
     }
     
     /*

@@ -2,7 +2,7 @@
  * Ce fichier fait partie du projet Space Invaders.
  *
  * (c) 2022 gasto
- * Tous droits réservés.
+ * Tous droits rï¿½servï¿½s.
  */
 
 package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
@@ -19,9 +19,11 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
 public interface IEtatVaisseau {
     
 
-    IEtatVaisseau nextState();
+   IEtatVaisseau nextState();
 
    void receiveShot();
+   
+   EtatVaisseau getState();
 
     
 }

@@ -78,5 +78,7 @@ public interface IMovableFactory {
     IMovable createShot(int x, int y);
     
     IMovable createMur(double x, double y);
+    
+    public IMovable createAlienSansTir(int x, int y);
 
 }
