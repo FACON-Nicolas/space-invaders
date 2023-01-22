@@ -26,6 +26,7 @@ import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.FastBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.model.movables.bonus.InvulnerabilityBonus;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -112,6 +113,9 @@ public final class SpaceInvadersGame {
      * L'animation du jeu, qui s'assure que les différents objets se déplacent.
      */
     private final AnimationTimer animation = new SpaceInvadersAnimation(this, movableObjects);
+    
+    private int level = 6;
+
 
     /**
      * Crée une nouvelle instance de SpaceInvadersGame.
@@ -190,6 +194,26 @@ public final class SpaceInvadersGame {
     public int getBottomLimit() {
         return height - 100;
     }
+    
+    
+    /**
+     * Donne l'attribut level de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut level de cette instance de SpaceInvadersGame.
+     */
+    public int getLevel() {
+        return level;
+    }
+    
+    
+    /**
+     * Modifie l'attribut level de cette instance de SpaceInvadersGame.
+     *
+     * @param level La nouvelle valeur de l'attribut level pour cette instance de SpaceInvadersGame.
+     */
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     /**
      * Associe à cette partie de Space-Invaders le contrôleur gérant l'affichage du jeu.
@@ -231,44 +255,51 @@ public final class SpaceInvadersGame {
         score.set(0);
         nbRemainingAliens = 0;
     }
-
+    
+    
+    /**
+     * Donne l'attribut nbRemainingAliens de cette instance de SpaceInvadersGame.
+     *
+     * @return L'attribut nbRemainingAliens de cette instance de SpaceInvadersGame.
+     */
+    public int getNbRemainingAliens() {
+        return nbRemainingAliens;
+    }
+    
+    
+    /**
+     * Modifie l'attribut nbRemainingAliens de cette instance de SpaceInvadersGame.
+     *
+     * @param nbRemainingAliens La nouvelle valeur de l'attribut nbRemainingAliens pour cette instance de SpaceInvadersGame.
+     */
+    public void setNbRemainingAliens(int nbRemainingAliens) {
+        this.nbRemainingAliens = nbRemainingAliens;
+    }
+    
     /**
      * Crée les différents objets présents au début de la partie et pouvant se déplacer.
      */
     private void createMovables() {
         // On commence par enlever tous les éléments mobiles encore présents.
+        ILevelFactory levelFactory = new LevelFactory(this, factory);
         clearAllMovables();
-        Random random=new Random();
-        int nbMurs = random.nextInt(10);
-        for(int i=0; i<nbMurs ; i++) {
-        	addMovable(factory.createMur(i*getRightLimit()/nbMurs,3*getBottomLimit()/5));
-        }
-        addMovable(factory.createMur(getRightLimit(),3*getBottomLimit()/5));
-        
         ship = factory.createShip(getBottomLimit(), getWidth()/2);
         addMovable(ship);
-        Random nb=new Random();
-        for (int i=0 ; i<5;i++) {
-            int nombre=nb.nextInt(11);
-            if(nombre<5) {
-                addMovable(factory.createAlienSansTir(getTopLimit(), getLeftLimit()));
-            } else {
-                addMovable(factory.createAlienVie(getTopLimit(), getLeftLimit()));
-            }
-            nbRemainingAliens ++;
-        }
+        levelFactory.createLevel(level);
     }
 
     /**
      * Choisit aléatoirement un bonus et le place dans le jeu à une position aléatoire.
      */
     public void dropBonus() {
-        Random random = new Random();
-        double x = random.nextInt(getRightLimit());
-        double y = 100;
-        List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, x, y), new FastBonus(this, x, y), new InvulnerabilityBonus(this, x, y));
-        AbstractBonus bonus = lesBonus.get(random.nextInt(lesBonus.size()));
-        addMovable(bonus);
+       if (level > 1) {
+            Random random = new Random();
+            double x = random.nextInt(getRightLimit());
+            double y = 100;
+            List<AbstractBonus> lesBonus = List.of(new AddHealthBonus(this, x, y), new FastBonus(this, x, y), new InvulnerabilityBonus(this, x, y));
+            AbstractBonus bonus = lesBonus.get(random.nextInt(lesBonus.size()));
+            addMovable(bonus);
+       }
     }
 
     /**
@@ -327,6 +358,7 @@ public final class SpaceInvadersGame {
         life.set(life.get()-1);
         if (life.get() == 0) {
             playerIsDead();
+            level = 0;
         }
     }
     
@@ -347,6 +379,7 @@ public final class SpaceInvadersGame {
         // Interrompre la partie.
         animation.stop();
         controller.gameOver("Un alien a atteint la Terre ! Fin de la partie");
+        level = 0;
     }
 
     /**
