@@ -41,7 +41,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @version 0.1.0
  */
 public final class SpaceInvadersGame {
-
+	private Random nb=new Random();
     /**
      * La vitesse du vaisseau du joueur lorsqu'il se déplace (en pixels/s).
      */

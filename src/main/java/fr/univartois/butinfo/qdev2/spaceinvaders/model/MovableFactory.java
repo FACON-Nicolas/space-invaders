@@ -41,6 +41,7 @@ public class MovableFactory implements IMovableFactory {
     
     private ISpriteStore spriteStore;
     private SpaceInvadersGame game;
+    protected Random rand = new Random();
     private IEtatVaisseau etat;
     /*
      * (non-Javadoc)
@@ -72,15 +73,13 @@ public class MovableFactory implements IMovableFactory {
     @Override
     public IMovable createAlien(int x, int y) {
         IContreAttaque defaut=new ContreAttaqueDefaut();
-        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game);
         IContreAttaque random=new ContreAttaqueRandom(160);
         
         List<IContreAttaque> liste =Arrays.asList(random,defaut);
-        Random rand = new Random();
+        
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
         IStratMove mouvementComposite=new StratMoveComposite(game);
-
         
         IMovable alien = new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,mouvementComposite);
         return alien;
@@ -88,18 +87,15 @@ public class MovableFactory implements IMovableFactory {
     
     public VieIMovableDecorator createAlienVie(int x, int y) {  
         IContreAttaque defaut=new ContreAttaqueDefaut();
-        //IContreAttaque intelligent=new ContreAttaqueIntelligent(game, null);
         IContreAttaque random=new ContreAttaqueRandom(160);
         
         List<IContreAttaque> liste =Arrays.asList(random);
-        Random rand = new Random();
         IContreAttaque element= liste.get(rand.nextInt(liste.size()));
         
         IStratMove mouvementComposite=new StratMoveComposite(game);
 
 
         VieIMovableDecorator alien = new VieIMovableDecorator(new AlienShip(game, x, y, spriteStore.getSprite("alien"), element,mouvementComposite),2);
-
         
         //faire un random dans la liste pour return un des truc
         
